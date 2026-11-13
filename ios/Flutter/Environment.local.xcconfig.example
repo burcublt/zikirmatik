@@ -1,0 +1,3 @@
+// Optional development overrides for a Bundle ID registered to your Apple team.
+// Copy to Environment.local.xcconfig and supply your actual identifier.
+// ZIKIRMATIK_BUNDLE_ID = your.registered.identifier

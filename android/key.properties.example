@@ -1,0 +1,6 @@
+# Copy to key.properties only when your real upload keystore is available.
+# storeFile is absolute or relative to the android directory.
+storeFile=
+storePassword=
+keyAlias=
+keyPassword=

@@ -1,0 +1,6 @@
+Data: İmsakiyem annual export; upstream declares Diyanet İşleri Başkanlığı as source.
+https://github.com/karademirmustafa/ezanvakti-imsakiyem-api
+Year: 2026
+Original generated_at: 2026-01-03T14:22:53.500Z
+This is not a Diyanet-operated distribution service.
+Upstream project license is preserved in SOURCE-LICENSE.txt.

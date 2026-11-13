@@ -1,0 +1,1145 @@
+{
+  "code": 200,
+  "data": [
+    {
+      "date": {
+        "gregorian": {
+          "date": "01-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "01",
+          "weekday": {
+            "en": "Sunday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:02 (+03)",
+        "Sunrise": "07:28 (+03)",
+        "Dhuhr": "12:53 (+03)",
+        "Asr": "15:42 (+03)",
+        "Sunset": "18:07 (+03)",
+        "Maghrib": "18:07 (+03)",
+        "Isha": "19:28 (+03)",
+        "Imsak": "05:52 (+03)",
+        "Midnight": "00:47 (+03)",
+        "Firstthird": "22:32 (+03)",
+        "Lastthird": "03:03 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "02-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "02",
+          "weekday": {
+            "en": "Monday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:03 (+03)",
+        "Sunrise": "07:29 (+03)",
+        "Dhuhr": "12:53 (+03)",
+        "Asr": "15:41 (+03)",
+        "Sunset": "18:06 (+03)",
+        "Maghrib": "18:06 (+03)",
+        "Isha": "19:27 (+03)",
+        "Imsak": "05:53 (+03)",
+        "Midnight": "00:47 (+03)",
+        "Firstthird": "22:31 (+03)",
+        "Lastthird": "03:04 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "03-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "03",
+          "weekday": {
+            "en": "Tuesday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:04 (+03)",
+        "Sunrise": "07:30 (+03)",
+        "Dhuhr": "12:53 (+03)",
+        "Asr": "15:40 (+03)",
+        "Sunset": "18:05 (+03)",
+        "Maghrib": "18:05 (+03)",
+        "Isha": "19:26 (+03)",
+        "Imsak": "05:54 (+03)",
+        "Midnight": "00:47 (+03)",
+        "Firstthird": "22:31 (+03)",
+        "Lastthird": "03:04 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "04-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "04",
+          "weekday": {
+            "en": "Wednesday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:05 (+03)",
+        "Sunrise": "07:31 (+03)",
+        "Dhuhr": "12:53 (+03)",
+        "Asr": "15:39 (+03)",
+        "Sunset": "18:03 (+03)",
+        "Maghrib": "18:03 (+03)",
+        "Isha": "19:25 (+03)",
+        "Imsak": "05:55 (+03)",
+        "Midnight": "00:47 (+03)",
+        "Firstthird": "22:30 (+03)",
+        "Lastthird": "03:04 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "05-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "05",
+          "weekday": {
+            "en": "Thursday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:06 (+03)",
+        "Sunrise": "07:32 (+03)",
+        "Dhuhr": "12:53 (+03)",
+        "Asr": "15:38 (+03)",
+        "Sunset": "18:02 (+03)",
+        "Maghrib": "18:02 (+03)",
+        "Isha": "19:24 (+03)",
+        "Imsak": "05:56 (+03)",
+        "Midnight": "00:47 (+03)",
+        "Firstthird": "22:30 (+03)",
+        "Lastthird": "03:05 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "06-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "06",
+          "weekday": {
+            "en": "Friday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:07 (+03)",
+        "Sunrise": "07:34 (+03)",
+        "Dhuhr": "12:53 (+03)",
+        "Asr": "15:37 (+03)",
+        "Sunset": "18:01 (+03)",
+        "Maghrib": "18:01 (+03)",
+        "Isha": "19:23 (+03)",
+        "Imsak": "05:57 (+03)",
+        "Midnight": "00:47 (+03)",
+        "Firstthird": "22:30 (+03)",
+        "Lastthird": "03:05 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "07-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "07",
+          "weekday": {
+            "en": "Saturday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:08 (+03)",
+        "Sunrise": "07:35 (+03)",
+        "Dhuhr": "12:53 (+03)",
+        "Asr": "15:36 (+03)",
+        "Sunset": "18:00 (+03)",
+        "Maghrib": "18:00 (+03)",
+        "Isha": "19:22 (+03)",
+        "Imsak": "05:58 (+03)",
+        "Midnight": "00:47 (+03)",
+        "Firstthird": "22:29 (+03)",
+        "Lastthird": "03:06 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "08-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "08",
+          "weekday": {
+            "en": "Sunday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:09 (+03)",
+        "Sunrise": "07:36 (+03)",
+        "Dhuhr": "12:53 (+03)",
+        "Asr": "15:35 (+03)",
+        "Sunset": "17:59 (+03)",
+        "Maghrib": "17:59 (+03)",
+        "Isha": "19:21 (+03)",
+        "Imsak": "05:59 (+03)",
+        "Midnight": "00:48 (+03)",
+        "Firstthird": "22:29 (+03)",
+        "Lastthird": "03:06 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "09-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "09",
+          "weekday": {
+            "en": "Monday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:10 (+03)",
+        "Sunrise": "07:37 (+03)",
+        "Dhuhr": "12:53 (+03)",
+        "Asr": "15:35 (+03)",
+        "Sunset": "17:58 (+03)",
+        "Maghrib": "17:58 (+03)",
+        "Isha": "19:20 (+03)",
+        "Imsak": "06:00 (+03)",
+        "Midnight": "00:48 (+03)",
+        "Firstthird": "22:29 (+03)",
+        "Lastthird": "03:06 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "10-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "10",
+          "weekday": {
+            "en": "Tuesday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:11 (+03)",
+        "Sunrise": "07:38 (+03)",
+        "Dhuhr": "12:53 (+03)",
+        "Asr": "15:34 (+03)",
+        "Sunset": "17:57 (+03)",
+        "Maghrib": "17:57 (+03)",
+        "Isha": "19:19 (+03)",
+        "Imsak": "06:01 (+03)",
+        "Midnight": "00:48 (+03)",
+        "Firstthird": "22:28 (+03)",
+        "Lastthird": "03:07 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "11-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "11",
+          "weekday": {
+            "en": "Wednesday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:12 (+03)",
+        "Sunrise": "07:40 (+03)",
+        "Dhuhr": "12:53 (+03)",
+        "Asr": "15:33 (+03)",
+        "Sunset": "17:56 (+03)",
+        "Maghrib": "17:56 (+03)",
+        "Isha": "19:18 (+03)",
+        "Imsak": "06:02 (+03)",
+        "Midnight": "00:48 (+03)",
+        "Firstthird": "22:28 (+03)",
+        "Lastthird": "03:07 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "12-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "12",
+          "weekday": {
+            "en": "Thursday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:13 (+03)",
+        "Sunrise": "07:41 (+03)",
+        "Dhuhr": "12:53 (+03)",
+        "Asr": "15:32 (+03)",
+        "Sunset": "17:55 (+03)",
+        "Maghrib": "17:55 (+03)",
+        "Isha": "19:18 (+03)",
+        "Imsak": "06:03 (+03)",
+        "Midnight": "00:48 (+03)",
+        "Firstthird": "22:28 (+03)",
+        "Lastthird": "03:08 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "13-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "13",
+          "weekday": {
+            "en": "Friday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:14 (+03)",
+        "Sunrise": "07:42 (+03)",
+        "Dhuhr": "12:53 (+03)",
+        "Asr": "15:32 (+03)",
+        "Sunset": "17:54 (+03)",
+        "Maghrib": "17:54 (+03)",
+        "Isha": "19:17 (+03)",
+        "Imsak": "06:04 (+03)",
+        "Midnight": "00:48 (+03)",
+        "Firstthird": "22:28 (+03)",
+        "Lastthird": "03:08 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "14-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "14",
+          "weekday": {
+            "en": "Saturday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:15 (+03)",
+        "Sunrise": "07:43 (+03)",
+        "Dhuhr": "12:53 (+03)",
+        "Asr": "15:31 (+03)",
+        "Sunset": "17:53 (+03)",
+        "Maghrib": "17:53 (+03)",
+        "Isha": "19:16 (+03)",
+        "Imsak": "06:05 (+03)",
+        "Midnight": "00:48 (+03)",
+        "Firstthird": "22:28 (+03)",
+        "Lastthird": "03:09 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "15-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "15",
+          "weekday": {
+            "en": "Sunday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:16 (+03)",
+        "Sunrise": "07:44 (+03)",
+        "Dhuhr": "12:54 (+03)",
+        "Asr": "15:30 (+03)",
+        "Sunset": "17:53 (+03)",
+        "Maghrib": "17:53 (+03)",
+        "Isha": "19:15 (+03)",
+        "Imsak": "06:06 (+03)",
+        "Midnight": "00:48 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:09 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "16-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "16",
+          "weekday": {
+            "en": "Monday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:17 (+03)",
+        "Sunrise": "07:45 (+03)",
+        "Dhuhr": "12:54 (+03)",
+        "Asr": "15:29 (+03)",
+        "Sunset": "17:52 (+03)",
+        "Maghrib": "17:52 (+03)",
+        "Isha": "19:15 (+03)",
+        "Imsak": "06:07 (+03)",
+        "Midnight": "00:49 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:10 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "17-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "17",
+          "weekday": {
+            "en": "Tuesday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:18 (+03)",
+        "Sunrise": "07:47 (+03)",
+        "Dhuhr": "12:54 (+03)",
+        "Asr": "15:29 (+03)",
+        "Sunset": "17:51 (+03)",
+        "Maghrib": "17:51 (+03)",
+        "Isha": "19:14 (+03)",
+        "Imsak": "06:08 (+03)",
+        "Midnight": "00:49 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:10 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "18-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "18",
+          "weekday": {
+            "en": "Wednesday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:19 (+03)",
+        "Sunrise": "07:48 (+03)",
+        "Dhuhr": "12:54 (+03)",
+        "Asr": "15:28 (+03)",
+        "Sunset": "17:50 (+03)",
+        "Maghrib": "17:50 (+03)",
+        "Isha": "19:14 (+03)",
+        "Imsak": "06:09 (+03)",
+        "Midnight": "00:49 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:11 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "19-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "19",
+          "weekday": {
+            "en": "Thursday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:20 (+03)",
+        "Sunrise": "07:49 (+03)",
+        "Dhuhr": "12:54 (+03)",
+        "Asr": "15:28 (+03)",
+        "Sunset": "17:49 (+03)",
+        "Maghrib": "17:49 (+03)",
+        "Isha": "19:13 (+03)",
+        "Imsak": "06:10 (+03)",
+        "Midnight": "00:49 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:11 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "20-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "20",
+          "weekday": {
+            "en": "Friday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:21 (+03)",
+        "Sunrise": "07:50 (+03)",
+        "Dhuhr": "12:55 (+03)",
+        "Asr": "15:27 (+03)",
+        "Sunset": "17:49 (+03)",
+        "Maghrib": "17:49 (+03)",
+        "Isha": "19:12 (+03)",
+        "Imsak": "06:11 (+03)",
+        "Midnight": "00:49 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:12 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "21-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "21",
+          "weekday": {
+            "en": "Saturday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:22 (+03)",
+        "Sunrise": "07:51 (+03)",
+        "Dhuhr": "12:55 (+03)",
+        "Asr": "15:27 (+03)",
+        "Sunset": "17:48 (+03)",
+        "Maghrib": "17:48 (+03)",
+        "Isha": "19:12 (+03)",
+        "Imsak": "06:12 (+03)",
+        "Midnight": "00:50 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:13 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "22-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "22",
+          "weekday": {
+            "en": "Sunday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:23 (+03)",
+        "Sunrise": "07:52 (+03)",
+        "Dhuhr": "12:55 (+03)",
+        "Asr": "15:26 (+03)",
+        "Sunset": "17:47 (+03)",
+        "Maghrib": "17:47 (+03)",
+        "Isha": "19:11 (+03)",
+        "Imsak": "06:13 (+03)",
+        "Midnight": "00:50 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:13 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "23-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "23",
+          "weekday": {
+            "en": "Monday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:24 (+03)",
+        "Sunrise": "07:54 (+03)",
+        "Dhuhr": "12:55 (+03)",
+        "Asr": "15:26 (+03)",
+        "Sunset": "17:47 (+03)",
+        "Maghrib": "17:47 (+03)",
+        "Isha": "19:11 (+03)",
+        "Imsak": "06:14 (+03)",
+        "Midnight": "00:50 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:14 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "24-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "24",
+          "weekday": {
+            "en": "Tuesday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:25 (+03)",
+        "Sunrise": "07:55 (+03)",
+        "Dhuhr": "12:56 (+03)",
+        "Asr": "15:25 (+03)",
+        "Sunset": "17:46 (+03)",
+        "Maghrib": "17:46 (+03)",
+        "Isha": "19:11 (+03)",
+        "Imsak": "06:15 (+03)",
+        "Midnight": "00:51 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:14 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "25-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "25",
+          "weekday": {
+            "en": "Wednesday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:26 (+03)",
+        "Sunrise": "07:56 (+03)",
+        "Dhuhr": "12:56 (+03)",
+        "Asr": "15:25 (+03)",
+        "Sunset": "17:46 (+03)",
+        "Maghrib": "17:46 (+03)",
+        "Isha": "19:10 (+03)",
+        "Imsak": "06:16 (+03)",
+        "Midnight": "00:51 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:15 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "26-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "26",
+          "weekday": {
+            "en": "Thursday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:27 (+03)",
+        "Sunrise": "07:57 (+03)",
+        "Dhuhr": "12:56 (+03)",
+        "Asr": "15:24 (+03)",
+        "Sunset": "17:45 (+03)",
+        "Maghrib": "17:45 (+03)",
+        "Isha": "19:10 (+03)",
+        "Imsak": "06:17 (+03)",
+        "Midnight": "00:51 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:15 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "27-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "27",
+          "weekday": {
+            "en": "Friday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:28 (+03)",
+        "Sunrise": "07:58 (+03)",
+        "Dhuhr": "12:57 (+03)",
+        "Asr": "15:24 (+03)",
+        "Sunset": "17:45 (+03)",
+        "Maghrib": "17:45 (+03)",
+        "Isha": "19:10 (+03)",
+        "Imsak": "06:18 (+03)",
+        "Midnight": "00:51 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:16 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "28-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "28",
+          "weekday": {
+            "en": "Saturday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:29 (+03)",
+        "Sunrise": "07:59 (+03)",
+        "Dhuhr": "12:57 (+03)",
+        "Asr": "15:24 (+03)",
+        "Sunset": "17:44 (+03)",
+        "Maghrib": "17:44 (+03)",
+        "Isha": "19:09 (+03)",
+        "Imsak": "06:19 (+03)",
+        "Midnight": "00:52 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:17 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "29-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "29",
+          "weekday": {
+            "en": "Sunday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:30 (+03)",
+        "Sunrise": "08:00 (+03)",
+        "Dhuhr": "12:57 (+03)",
+        "Asr": "15:23 (+03)",
+        "Sunset": "17:44 (+03)",
+        "Maghrib": "17:44 (+03)",
+        "Isha": "19:09 (+03)",
+        "Imsak": "06:20 (+03)",
+        "Midnight": "00:52 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:17 (+03)"
+      }
+    },
+    {
+      "date": {
+        "gregorian": {
+          "date": "30-11-2026",
+          "format": "DD-MM-YYYY",
+          "day": "30",
+          "weekday": {
+            "en": "Monday"
+          },
+          "month": {
+            "number": 11,
+            "en": "November"
+          },
+          "year": "2026",
+          "designation": {
+            "abbreviated": "AD",
+            "expanded": "Anno Domini"
+          },
+          "lunarSighting": false
+        }
+      },
+      "meta": {
+        "timezone": "Europe/Istanbul"
+      },
+      "timings": {
+        "Fajr": "06:31 (+03)",
+        "Sunrise": "08:01 (+03)",
+        "Dhuhr": "12:58 (+03)",
+        "Asr": "15:23 (+03)",
+        "Sunset": "17:44 (+03)",
+        "Maghrib": "17:44 (+03)",
+        "Isha": "19:09 (+03)",
+        "Imsak": "06:21 (+03)",
+        "Midnight": "00:53 (+03)",
+        "Firstthird": "22:27 (+03)",
+        "Lastthird": "03:18 (+03)"
+      }
+    }
+  ]
+}
