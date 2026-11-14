@@ -13,7 +13,7 @@ import 'package:zikirmatik/features/home/application/home_notifier.dart';
 import 'package:zikirmatik/features/home/domain/home_state.dart';
 import 'package:zikirmatik/features/home/presentation/widgets/counter_display.dart';
 import 'package:zikirmatik/features/home/presentation/widgets/main_bottom_nav.dart';
-import 'package:zikirmatik/features/home/presentation/widgets/stats_row.dart';
+import 'package:zikirmatik/features/home/presentation/widgets/zikr_progress_card.dart';
 import 'package:zikirmatik/features/home/presentation/widgets/tasbih_painter.dart';
 import 'package:zikirmatik/features/settings/presentation/settings_page.dart';
 import 'package:zikirmatik/features/statistics/presentation/statistics_page.dart';
@@ -292,10 +292,11 @@ class _HomeBody extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    StatsRow(
-                      dailyTotal: state.dailyTotal,
-                      streakDays: state.streakDays,
-                      totalCount: state.totalCount,
+                    ZikrProgressCard(
+                      title: state.activeZikr?.title ?? l10n.noZikrSelected,
+                      currentCount: state.currentCount,
+                      targetCount: state.targetCount,
+                      onTap: onChangeZikr,
                     ),
                     SizedBox(height: 12),
                   ],
