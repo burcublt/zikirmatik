@@ -26,7 +26,13 @@ class PrayerDataTests(unittest.TestCase):
  def test_bundled_catalog_has_one_full_year_per_region(self):
   base=ROOT/'assets/prayer_times';catalog=json.loads((base/'regions.json').read_text())
   self.assertEqual(len(catalog['regions']),880)
-  for region in catalog['regions']:
-   payload=json.loads((base/'v1/2026'/f'{region["id"]}.json').read_text())
-   self.assertEqual(payload['region'],region['id']);self.assertEqual(len(payload['days']),365)
+  manifest=json.loads((base/'manifest.json').read_text())
+  self.assertEqual(manifest['years'],[2026,2027])
+  for year in manifest['years']:
+   for region in catalog['regions']:
+    payload=json.loads((base/f'v1/{year}'/f'{region["id"]}.json').read_text())
+    self.assertEqual(payload['year'],year);self.assertEqual(payload['region'],region['id'])
+    self.assertEqual(payload['zone'],region['zone'])
+    rows=[{'date':r[0],'times':dict(zip(module.KEYS,r[1:]))} for r in payload['days']]
+    self.assertEqual(len(module.validate_rows(rows,year)),365)
 if __name__=='__main__':unittest.main()

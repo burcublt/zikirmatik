@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -6,6 +8,7 @@ import 'package:zikirmatik/app/widgets/zikr_scaffold.dart';
 import 'package:zikirmatik/core/ads/admob.dart';
 import 'package:zikirmatik/core/localization/app_locales.dart';
 import 'package:zikirmatik/core/localization/app_localizations_x.dart';
+import 'package:zikirmatik/core/services/push_notification_service.dart';
 import 'package:zikirmatik/features/home/application/home_notifier.dart';
 import 'package:zikirmatik/features/home/presentation/widgets/main_bottom_nav.dart';
 import 'package:zikirmatik/features/settings/application/settings_notifier.dart';
@@ -32,6 +35,12 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
     setState(() => _busy = true);
     try {
       await operation();
+    } on PushNotificationSetupException {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(context.l10n.pushSetupRequired)));
+      }
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(
@@ -148,6 +157,18 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
               SettingsSection(
                 children: [
                   SettingsToggleTile(
+                    icon: Icons.campaign_outlined,
+                    title: l10n.pushNotifications,
+                    subtitle: l10n.pushNotificationsDescription,
+                    value: settings.pushNotificationsEnabled,
+                    onChanged: (value) => _run(() async {
+                      final changed = await notifier.setPushNotifications(
+                        value,
+                      );
+                      if (!changed && mounted) _permissionDenied();
+                    }),
+                  ),
+                  SettingsToggleTile(
                     icon: Icons.notifications_none_outlined,
                     title: l10n.dailyReminder,
                     value: settings.reminderEnabled,
@@ -175,13 +196,19 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                       ],
                     ),
                     onTap: () async {
-                      final time = await showTimePicker(
-                        context: context,
-                        initialTime: TimeOfDay(
-                          hour: settings.reminderHour,
-                          minute: settings.reminderMinute,
-                        ),
-                      );
+                      final time = defaultTargetPlatform == TargetPlatform.iOS
+                          ? await _showCupertinoTimePicker(
+                              context,
+                              hour: settings.reminderHour,
+                              minute: settings.reminderMinute,
+                            )
+                          : await showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay(
+                                hour: settings.reminderHour,
+                                minute: settings.reminderMinute,
+                              ),
+                            );
                       if (time != null && mounted) {
                         await _run(() async {
                           final changed = await notifier.setReminder(
@@ -286,6 +313,70 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<TimeOfDay?> _showCupertinoTimePicker(
+    BuildContext context, {
+    required int hour,
+    required int minute,
+  }) {
+    var selectedTime = TimeOfDay(hour: hour, minute: minute);
+    final l10n = context.l10n;
+    return showCupertinoModalPopup<TimeOfDay>(
+      context: context,
+      builder: (popupContext) => CupertinoTheme(
+        data: CupertinoThemeData(
+          brightness: Theme.of(popupContext).brightness,
+          primaryColor: popupContext.palette.gold,
+        ),
+        child: CupertinoPopupSurface(
+          child: SafeArea(
+            top: false,
+            child: SizedBox(
+              height: 260,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 44,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CupertinoButton(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            onPressed: () => Navigator.pop(popupContext),
+                            child: Text(l10n.cancel),
+                          ),
+                          CupertinoButton(
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
+                            onPressed: () =>
+                                Navigator.pop(popupContext, selectedTime),
+                            child: Text(l10n.save),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: CupertinoDatePicker(
+                      mode: CupertinoDatePickerMode.time,
+                      initialDateTime: DateTime(2000, 1, 1, hour, minute),
+                      use24hFormat: MediaQuery.alwaysUse24HourFormatOf(
+                        popupContext,
+                      ),
+                      onDateTimeChanged: (dateTime) {
+                        selectedTime = TimeOfDay.fromDateTime(dateTime);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),

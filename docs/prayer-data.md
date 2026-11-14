@@ -2,9 +2,9 @@
 
 ## Mevcut sürüm
 
-- Türkiye ve KKTC: İmsakiyem'in Diyanet kaynaklı olarak yayımladığı 2026 yıllık veri seti, 880 takvim bölgesi ve 321.200 günlük kayıt. Kaynak resmî Diyanet API'si değildir.
+- Türkiye ve KKTC: İmsakiyem'in Diyanet kaynaklı olarak yayımladığı 2026 ve 2027 yıllık verileri; her yıl 880 takvim bölgesi ve 321.200 günlük kayıt (toplam 642.400 kayıt). Kaynak resmî Diyanet API'si değildir.
 - İl/ilçe listesi idari ilçelerin tamamı gibi kabul edilmez. Liste, kaynakta bulunan takvim bölgelerini gösterir. GPS yalnız ülke/il/bölge adları tam ve tekil eşleşirse otomatik seçer; aksi durumda kullanıcı bölge seçer. Yakın bölge tahmini yapılmaz.
-- Tüm bölgelerin 2026 verisi uygulamayla paketlenir; yalnız seçili bölge belleğe alınır ve yerel veritabanına kaydedilir. İlk uygulama paketinde yaklaşık 20,5 MB ham veri bulunur; statik dağıtım ZIP'i yaklaşık 3,9 MB'dır.
+- Tüm bölgelerin 2026 ve 2027 verisi uygulamayla paketlenir; yalnız seçili bölge belleğe alınır ve yerel veritabanına kaydedilir. İki yılın bölge dosyaları yaklaşık 41 MB ham veridir; yalnız seçili bölgenin yıllık dosyası okunur.
 - Yıllık kaydın tarihleri yerel takvim günü, saatleri HH:mm'dir. Türkiye Europe/Istanbul, KKTC Asia/Nicosia saat dilimindedir. Kaynaktaki gece yarısı ISO zaman damgası bir UTC vakti olarak çevrilmez.
 - Diğer ülkeler için mevcut AlAdhan hesaplama yolu devam eder. Kaynak ekranda “hesaplanan vakitler” olarak ayrılır; resmî yerel takvimle eşleşme iddiası yoktur. Yeni yerel resmî sağlayıcı entegrasyonu bu turda yapılmadı.
 - Eski Türkiye AlAdhan önbelleği Diyanet takvimi olarak kullanılmaz. Yıllık takvim UserPreferences id=6 içinde saklanır; veritabanı şeması değişmez.
@@ -43,7 +43,7 @@ python3 scripts/prepare_prayer_data.py \
 python3 scripts/package_prayer_distribution.py
 ```
 
-Komut manifest içindeki dosya özetlerini doğrular ve build/prayer-data-2026.zip üretir. ZIP'i açıp içeriğini HTTPS statik sunucu/CDN köküne koymak yeterlidir. Bu betik hiçbir sunucuya yükleme yapmaz. Kişisel konum, kullanıcı verisi veya anahtar içermez.
+Komut manifest içindeki dosya özetlerini doğrular ve manifestteki yıllara göre build/prayer-data-2026-2027.zip üretir. ZIP'i açıp içeriğini HTTPS statik sunucu/CDN köküne koymak yeterlidir. Bu betik hiçbir sunucuya yükleme yapmaz. Kişisel konum, kullanıcı verisi veya anahtar içermez.
 
 Beklenen dosya örnekleri:
 
@@ -58,7 +58,49 @@ Uygulama geçerli yerel kaydı 24 saat yeniden kullanır. Kullanıcı sayfayı a
 ## Sınırlar ve kalan işler
 
 - Kullanıcının kararıyla şu an HTTPS sunucu/CDN yok; yalnız dağıtım paketi hazırlandı.
-- Yalnız 2026 yılı mevcut. 2027 verisi edinilip doğrulanmadan gelecek yıl vakitleri üretilmez. 31 Aralık yatsısından sonra gelecek imsak yoksa geri sayım yerine takvim bulunamadı bilgisi gösterilir.
+- 2026 ve 2027 paketlidir. Yıl değişimi yerel tarihle otomatik yapılır; 31 Aralık gecesinde sonraki yıl da yüklenir. 2028 verisi yoktur; mevcut olmayan gelecek yıl için vakit üretilmez.
 - Yeni bölge eklenirse katalog ve uygulama varlıkları birlikte güncellenmelidir.
 - İlçe takvimi seçmek fiziksel koordinat üretmez. Kıble, gerçek GPS koordinatı veya ayrıca çözülmüş şehir koordinatı kullanır; 0/0 temsili değeri pusulaya verilmez.
 - Fiziksel cihazda yeni bölge seçimi kullanıcıyla ayrıca doğrulanır.
+
+## Son doğrulama — 14 Kasım 2026
+
+- İlgili 27 Flutter testi ve 4 veri hazırlama testi başarılı; tüm ekran testleri çalıştırılmadı.
+- Kod analizi temiz. Android debug ve imzalı iOS profile test paketleri derlendi.
+- Güncel iOS paketi bağlı iPhone 14 Pro'ya kuruldu; com.burcubalta.zikirmatik.dev uygulaması başarıyla başlatıldı. Bölge seçimi ve saatlerin fiziksel ekranda kullanıcıyla kontrolü ayrıca yapılacak.
+- build/prayer-data-2026.zip: 4.043.811 bayt, 884 ZIP girdisi; dosya özetleri ve ZIP bütünlüğü doğrulandı. Sunucuya yayımlanmadı.
+
+### iPhone test paketinin doğru çıktısı
+
+Bu makinede bağımsız açılabilen son paket `build/ios/Profile-iphoneos/Runner.app` içindedir. `build/ios/iphoneos/Runner.app` altında önceki debug paketinin kalabildiği görüldü. Kurulumdan önce App.framework/flutter_assets altında kernel_blob.bin bulunmadığı ve gerçek Profile çıktısının kullanıldığı doğrulandı; 14 Kasım kurulumunda Profile-iphoneos yolu kullanıldı. Debug paketini hata ayıklayıcı olmadan açmak iOS'ta uygulamayı sonlandırır.
+
+## 2027 güncellemesi — 14 Kasım 2026
+
+2027 verisi, yayımlanmış `/api/v2/times?district=BOLGE&date=2027-01-01&period=yearly` yanıtlarından alındı. Eski yılın tarihleri değiştirilmedi; 2026 dosyaları aynı baytlarla korundu. Her bölgede tüm 365 tarih, altı vaktin biçimi/sırası, ülke ve bölge kimliği doğrulandı. 2026 için yukarıda belirtilen resmî Diyanet karşılaştırması, 2027 için bağımsız resmî karşılaştırma yapıldığı anlamına gelmez.
+
+İndirme sağlayıcının 100 istek / 5 dakika sınırını korur ve kesilirse geçerli önbellekten devam eder:
+
+```sh
+python3 scripts/fetch_prayer_year.py \
+  --year 2027 --catalog assets/prayer_times/regions.json \
+  --cache /dosyalar/namaz-cache --output /dosyalar/prayer-times.2027.json
+python3 scripts/prepare_prayer_data.py \
+  --source /dosyalar/prayer-times.2027.json \
+  --districts /dosyalar/prayer-times.districts.json \
+  --states /dosyalar/prayer-times.states.json \
+  --license /dosyalar/LICENSE \
+  --merge-from assets/prayer_times --output /yeni/klasor/prayer-times
+```
+
+Bazı sınır bölgelerinde sağlayıcının coğrafi saat dilimi etiketi ülkenin takvim saat dilimiyle uyuşmaz. Böyle bir kayıt, aynı bölgenin v1 uç noktasındaki 365 günlük takviminin tamamı v2 ile birebir eşleşmeden kabul edilmez. Vakit saatleri değiştirilmez; paketli katalogdaki Türkiye/KKTC saat dilimi korunur. Karşılaştırılan ham yanıtların özetleri manifestte `upstreams.2027.timezoneCrossChecks` altında bulunur.
+
+2027 ham veri SHA-256: `92d6f9e28415f28177ca0e73e290c9bcd939c0fc888d362db6d421e1bf3b9798`.
+Sunucu/CDN ve gerçek yayın bilgileri kullanıcının kararıyla en sona bırakıldı; bu güncelleme hiçbir haricî yayın yapmaz.
+
+### 2027 hedefli kontrol sonucu
+
+- Yalnız yıllık takvim ve yıl geçişinin 14 Flutter testi ile 12 veri testi başarılı; diğer ekranlar yeniden test edilmedi.
+- Değişen üç Dart dosyasının analizi temiz.
+- Dağıtım: `build/prayer-data-2026-2027.zip`, 8.066.684 bayt, 1.764 ZIP girdisi; bütünlük ve manifestteki tüm özetler doğrulandı.
+- 2026 bölge dosyaları ve katalog değişmedi; kullanıcının ayarlar/saat seçimi, reklam ve bildirim dosyaları korundu.
+- Güncel kaynakla imzalı iOS Profile derlemesi başarılı; paketin 880 adet 2027 dosyası kaynakla birebir doğrulandı. Fiziksel iPhone erişilemediği için bu sürüm telefona kurulmadı.

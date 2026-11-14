@@ -1,3 +1,5 @@
+import 'ad_slot_loader.dart';
+export 'ad_slot_loader.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -79,8 +81,6 @@ class AdsController extends AsyncNotifier<AdsState> {
   }
 }
 
-enum AdPlacement { zikrList, statistics }
-
 /// The SDK owns creative content, disclosure and click handling.
 /// Empty/failed/unsupported placements collapse completely.
 class AdMobSlot extends ConsumerWidget {
@@ -96,12 +96,18 @@ class AdMobSlot extends ConsumerWidget {
         : AdUnits.banner;
     if (id.isEmpty) return const SizedBox.shrink();
     return LayoutBuilder(
-      builder: (context, box) => _LoadedAd(
-        key: ValueKey('$placement-${box.maxWidth.floor()}-$id'),
-        placement: placement,
-        width: box.maxWidth.floor(),
-        adUnitId: id,
-      ),
+      builder: (context, box) {
+        if (!box.hasBoundedWidth || box.maxWidth < 1) {
+          return const SizedBox.shrink();
+        }
+        return _LoadedAd(
+          key: ValueKey('$placement-${box.maxWidth.floor()}-$id'),
+          placement: placement,
+          width: box.maxWidth.floor(),
+          adUnitId: id,
+          loader: ref.watch(adSlotLoaderProvider),
+        );
+      },
     );
   }
 }
@@ -112,100 +118,158 @@ class _LoadedAd extends StatefulWidget {
     required this.placement,
     required this.width,
     required this.adUnitId,
+    required this.loader,
   });
   final AdPlacement placement;
   final int width;
   final String adUnitId;
+  final AdSlotLoader loader;
   @override
   State<_LoadedAd> createState() => _LoadedAdState();
 }
 
-class _LoadedAdState extends State<_LoadedAd> {
-  AdWithView? _ad;
-  bool _loaded = false;
-  double _height = 0;
-
+class _LoadedAdState extends State<_LoadedAd> with WidgetsBindingObserver {
+  AdSlotHandle? _handle;
+  Timer? _retry, _watchdog, _cooldown;
+  bool _loaded = false,
+      _loading = false,
+      _foreground = true,
+      _waitingForResume = false;
+  int _generation = 0, _failures = 0;
+  static const _retryDelays = [
+    Duration(seconds: 30),
+    Duration(seconds: 60),
+    Duration(seconds: 120),
+  ];
   @override
   void initState() {
     super.initState();
-    unawaited(_load());
+    WidgetsBinding.instance.addObserver(this);
+    final lifecycle = WidgetsBinding.instance.lifecycleState;
+    _foreground = lifecycle == null || lifecycle == AppLifecycleState.resumed;
+    if (_foreground) {
+      unawaited(_load());
+    } else {
+      _waitingForResume = true;
+    }
   }
 
-  void _onLoaded(Ad ad) {
-    if (!mounted || ad != _ad) return;
-    setState(() => _loaded = true);
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final active = state == AppLifecycleState.resumed;
+    if (active == _foreground) return;
+    _foreground = active;
+    if (!active) {
+      _retry?.cancel();
+      _retry = null;
+      _waitingForResume = true;
+      _release();
+      setState(() {});
+    } else {
+      _failures = 0;
+      if (_cooldown == null) {
+        _waitingForResume = false;
+        unawaited(_load());
+      }
+    }
   }
 
-  void _onFailed(Ad ad, LoadAdError error) {
-    debugPrint(
-      'AdMob ${widget.placement} failed: ${error.code} ${error.message}',
-    );
-    if (!mounted || ad != _ad) return;
-    ad.dispose();
-    _ad = null;
-    setState(() => _loaded = false);
+  void _release() {
+    _generation++;
+    _watchdog?.cancel();
+    _watchdog = null;
+    _handle?.dispose();
+    _handle = null;
+    _loading = false;
+    _loaded = false;
+  }
+
+  void _failed(int generation, Object error) {
+    if (!mounted || generation != _generation) return;
+    debugPrint('AdMob ${widget.placement} failed: $error');
+    _release();
+    setState(() {});
+    _failures++;
+    if (!_foreground || _failures > _retryDelays.length) return;
+    _retry?.cancel();
+    _retry = Timer(_retryDelays[_failures - 1], () {
+      _retry = null;
+      unawaited(_load());
+    });
   }
 
   Future<void> _load() async {
+    if (!mounted || !_foreground || _loading || _loaded || _cooldown != null) {
+      return;
+    }
+    _loading = true;
+    final generation = ++_generation;
+    // Rate-limit retries and rapid background/resume cycles without refreshing a
+    // successfully displayed banner (SDK refresh remains the SDK's responsibility).
+    _cooldown = Timer(const Duration(seconds: 30), () {
+      _cooldown = null;
+      if (mounted && _foreground && _waitingForResume) {
+        _waitingForResume = false;
+        unawaited(_load());
+      }
+    });
+    _watchdog = Timer(
+      const Duration(seconds: 25),
+      () => _failed(generation, TimeoutException('Ad load timed out')),
+    );
     try {
-      if (widget.placement == AdPlacement.zikrList) {
-        _height = 132;
-        final ad = NativeAd(
-          adUnitId: widget.adUnitId,
-          request: const AdRequest(),
-          listener: NativeAdListener(
-            onAdLoaded: _onLoaded,
-            onAdFailedToLoad: _onFailed,
-          ),
-          factoryId: 'zikrCard',
-          customOptions: {'width': widget.width},
-        );
-        _ad = ad;
-        await ad.load();
-      } else {
-        final size = await AdSize.getLargeAnchoredAdaptiveBannerAdSize(
-          widget.width,
-        );
-        if (!mounted || size == null) return;
-        _height = size.height.toDouble();
-        final ad = BannerAd(
-          adUnitId: widget.adUnitId,
-          size: size,
-          request: const AdRequest(),
-          listener: BannerAdListener(
-            onAdLoaded: _onLoaded,
-            onAdFailedToLoad: _onFailed,
-          ),
-        );
-        _ad = ad;
-        await ad.load();
+      final handle = await widget.loader.prepare(
+        placement: widget.placement,
+        width: widget.width,
+        adUnitId: widget.adUnitId,
+        onLoaded: () {
+          if (!mounted || generation != _generation) return;
+          _watchdog?.cancel();
+          _watchdog = null;
+          _loading = false;
+          _failures = 0;
+          setState(() => _loaded = true);
+        },
+        onFailed: (error) => _failed(generation, error),
+      );
+      if (!mounted || !_foreground || generation != _generation) {
+        handle?.dispose();
+        return;
       }
+      if (handle == null) {
+        _failed(generation, StateError('No adaptive ad size'));
+        return;
+      }
+      _handle = handle;
+      await handle.load();
     } catch (error) {
-      debugPrint('AdMob ${widget.placement} exception: $error');
-      if (mounted) {
-        _ad?.dispose();
-        _ad = null;
-        setState(() => _loaded = false);
-      }
+      _failed(generation, error);
     }
   }
 
   @override
   void dispose() {
-    _ad?.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+    _retry?.cancel();
+    _cooldown?.cancel();
+    _release();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!_loaded || _ad == null) return const SizedBox.shrink();
+    final handle = _handle;
+    if (!_loaded || handle == null) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Center(
         child: SizedBox(
           width: widget.width.toDouble(),
-          height: _height,
-          child: AdWidget(ad: _ad!),
+          height: handle.height,
+          child: KeyedSubtree(
+            key: ObjectKey(handle),
+            child: handle.buildView(),
+          ),
         ),
       ),
     );

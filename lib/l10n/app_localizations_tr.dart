@@ -384,6 +384,16 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dailyReminder => 'Günlük Hatırlatma';
 
   @override
+  String get pushNotifications => 'Duyurular';
+
+  @override
+  String get pushNotificationsDescription => 'Uygulama duyurularını al';
+
+  @override
+  String get pushSetupRequired =>
+      'Bildirimler henüz Firebase projesine bağlanmadı. Kurulum için README adımlarını tamamlayın.';
+
+  @override
   String get reminderTime => 'Hatırlatma Saati';
 
   @override
@@ -404,11 +414,11 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get notificationPermissionRequired =>
-      'Hatırlatma için cihaz ayarlarından bildirim izni vermelisiniz.';
+      'Bildirimleri etkinleştirmek için cihaz ayarlarından izin vermelisiniz.';
 
   @override
   String get privacySummary =>
-      'Zikir kayıtlarınız, favorileriniz ve uygulama tercihleriniz cihazınızdaki yerel veritabanında saklanır. Uygulama reklam göstermek için Google AdMob kullanır. Google, reklam ve cihaz bilgilerini kendi gizlilik politikası kapsamında işleyebilir. Gerektiğinde reklam gizlilik tercihlerinizi Ayarlar ekranından değiştirebilirsiniz. Türkiye ve KKTC takvimleri cihazdaki yıllık veri setinden okunur. Diğer ülkelerde hesaplanan vakitler için yaklaşık koordinatlar AlAdhan servisine gönderilir. Şehir ve adres sorguları cihazın konum/adres hizmetini kullanır. Takvim güncellemeleri yapılandırılmış veri sunucusundan bölge kimliğiyle alınabilir. Alınan vakitler ve seçtiğiniz konum çevrim dışı kullanım için cihazda saklanır. Konum arka planda takip edilmez.';
+      'Zikir kayıtlarınız, favorileriniz ve uygulama tercihleriniz cihazınızdaki yerel veritabanında saklanır. Duyuruları açarsanız Firebase Cloud Messaging bildirimleri iletmek için cihaz bildirim belirtecini işler. Uygulama reklam göstermek için Google AdMob kullanır. Google, reklam ve cihaz bilgilerini kendi gizlilik politikası kapsamında işleyebilir. Gerektiğinde reklam gizlilik tercihlerinizi Ayarlar ekranından değiştirebilirsiniz. Türkiye ve KKTC takvimleri cihazdaki yıllık veri setinden okunur. Diğer ülkelerde hesaplanan vakitler için yaklaşık koordinatlar AlAdhan servisine gönderilir. Şehir ve adres sorguları cihazın konum/adres hizmetini kullanır. Takvim güncellemeleri yapılandırılmış veri sunucusundan bölge kimliğiyle alınabilir. Alınan vakitler ve seçtiğiniz konum çevrim dışı kullanım için cihazda saklanır. Konum arka planda takip edilmez.';
 
   @override
   String get googlePrivacy => 'Google Gizlilik Politikası';

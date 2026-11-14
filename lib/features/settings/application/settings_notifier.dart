@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zikirmatik/core/localization/app_locales.dart';
 import 'package:zikirmatik/core/localization/locale_controller.dart';
+import 'package:zikirmatik/core/services/push_notification_service.dart';
 import 'package:zikirmatik/core/services/reminder_service.dart';
 import 'package:zikirmatik/features/settings/data/settings_repository.dart';
 
@@ -14,6 +15,20 @@ class SettingsNotifier extends AsyncNotifier<AppSettings> {
   @override
   Future<AppSettings> build() async {
     final settings = await ref.read(settingsRepositoryProvider).read();
+    if (settings.pushNotificationsEnabled) {
+      try {
+        await ref.read(pushNotificationServiceProvider).restore();
+      } on PushNotificationSetupException catch (error, stackTrace) {
+        FlutterError.reportError(
+          FlutterErrorDetails(
+            exception: error,
+            stack: stackTrace,
+            library: 'push notifications',
+            context: ErrorDescription('while restoring the topic subscription'),
+          ),
+        );
+      }
+    }
     if (settings.reminderEnabled) {
       try {
         final allowed = await ref.read(reminderServiceProvider).apply(settings);
@@ -67,6 +82,34 @@ class SettingsNotifier extends AsyncNotifier<AppSettings> {
         await _save(next);
       } catch (_) {
         await ref.read(reminderServiceProvider).apply(previous);
+        rethrow;
+      }
+      return true;
+    } finally {
+      _busy = false;
+    }
+  }
+
+  Future<bool> setPushNotifications(bool enabled) async {
+    if (_busy) return false;
+    _busy = true;
+    final previous = state.requireValue;
+    final next = previous.copyWith(pushNotificationsEnabled: enabled);
+    try {
+      final service = ref.read(pushNotificationServiceProvider);
+      if (enabled) {
+        if (!await service.enable()) return false;
+      } else {
+        await service.disable();
+      }
+      try {
+        await _save(next);
+      } catch (_) {
+        if (previous.pushNotificationsEnabled) {
+          await service.enable();
+        } else {
+          await service.disable();
+        }
         rethrow;
       }
       return true;

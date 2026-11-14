@@ -790,6 +790,24 @@ abstract class AppLocalizations {
   /// **'Daily Reminder'**
   String get dailyReminder;
 
+  /// No description provided for @pushNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Announcements'**
+  String get pushNotifications;
+
+  /// No description provided for @pushNotificationsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Receive app announcements'**
+  String get pushNotificationsDescription;
+
+  /// No description provided for @pushSetupRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications are not connected to a Firebase project yet. Complete the setup steps in the README.'**
+  String get pushSetupRequired;
+
   /// No description provided for @reminderTime.
   ///
   /// In en, this message translates to:
@@ -829,13 +847,13 @@ abstract class AppLocalizations {
   /// No description provided for @notificationPermissionRequired.
   ///
   /// In en, this message translates to:
-  /// **'Allow notifications in your device settings to enable reminders.'**
+  /// **'Allow notifications in your device settings to enable them.'**
   String get notificationPermissionRequired;
 
   /// No description provided for @privacySummary.
   ///
   /// In en, this message translates to:
-  /// **'Your dhikr records, favorites and app preferences are stored in a local database on your device. The app uses Google AdMob to display ads. Google may process advertising and device information under its own privacy policy. When required, you can change ad privacy options in Settings. Türkiye and Northern Cyprus timetables are read from the bundled annual dataset. For calculated times in other countries, approximate coordinates are sent to AlAdhan. City and address lookups use the device’s location/address service. Timetable updates can be fetched by region ID from the configured data server. Prayer times and your chosen location are saved on your device for offline use. Your location is not tracked in the background.'**
+  /// **'Your dhikr records, favorites and app preferences are stored in a local database on your device. If you enable announcements, Firebase Cloud Messaging processes your device\'s notification token to deliver them. The app uses Google AdMob to display ads. Google may process advertising and device information under its own privacy policy. When required, you can change ad privacy options in Settings. Türkiye and Northern Cyprus timetables are read from the bundled annual dataset. For calculated times in other countries, approximate coordinates are sent to AlAdhan. City and address lookups use the device’s location/address service. Timetable updates can be fetched by region ID from the configured data server. Prayer times and your chosen location are saved on your device for offline use. Your location is not tracked in the background.'**
   String get privacySummary;
 
   /// No description provided for @googlePrivacy.

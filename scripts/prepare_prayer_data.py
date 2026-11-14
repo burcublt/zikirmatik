@@ -10,7 +10,6 @@ import hashlib
 import json
 from pathlib import Path
 import re
-import shutil
 
 KEYS = ('imsak','gunes','ogle','ikindi','aksam','yatsi')
 SOURCE_URL = 'https://github.com/karademirmustafa/ezanvakti-imsakiyem-api'
@@ -35,7 +34,26 @@ def validate_rows(rows, year):
         result.append([day,*times])
     return result
 
-def prepare(source, districts, states, license_path, output):
+def merge_base(base, incoming, year):
+    if base is None:return {}, {}, []
+    base=Path(base);manifest=json.loads((base/'manifest.json').read_text())
+    if manifest.get('version')!=1:raise ValueError('Unsupported base manifest')
+    files={}
+    for name,digest in manifest['files'].items():
+        path=base/name
+        if not path.resolve().is_relative_to(base.resolve()):raise ValueError('Unsafe base manifest path')
+        data=path.read_bytes()
+        if hashlib.sha256(data).hexdigest()!=digest:raise ValueError(f'Base checksum mismatch: {name}')
+        files[name]=data
+    old={r['id']:r for r in json.loads(files['regions.json'])['regions']}
+    new={r['id']:r for r in json.loads(incoming['regions.json'])['regions']}
+    if old!=new:raise ValueError('Year catalogs differ; explicit region migration required')
+    previous=manifest.get('upstreams',{})
+    if not previous:
+        previous={str(y):{'sha256':manifest['upstreamSha256'],'source':manifest['source']} for y in manifest['years']}
+    return files,dict(previous),list(manifest['years'])
+
+def prepare(source, districts, states, license_path, output, base=None):
     raw=Path(source).read_bytes(); dataset=json.loads(raw);year=dataset['meta']['year']
     if type(year) is not int or not 2000<=year<=2100: raise ValueError('Invalid year')
     districts=json.loads(Path(districts).read_text());states={s['_id']:s for s in json.loads(Path(states).read_text())}
@@ -61,7 +79,11 @@ def prepare(source, districts, states, license_path, output):
     files['regions.json']=compact({'version':1,'regions':sorted(regions,key=lambda r:(r['country'],r['province'],r['name']))})
     files['ATTRIBUTION.txt']=(f'Data: İmsakiyem annual export; upstream declares Diyanet İşleri Başkanlığı as source.\n{SOURCE_URL}\nYear: {year}\nOriginal generated_at: {dataset["meta"].get("generated_at", "unknown")}\nThis is not a Diyanet-operated distribution service.\nUpstream project license is preserved in SOURCE-LICENSE.txt.\n').encode()
     files['SOURCE-LICENSE.txt']=Path(license_path).read_bytes()
-    manifest={'version':1,'years':[year],'regionCount':len(regions),'source':SOURCE_URL,'upstreamSha256':hashlib.sha256(raw).hexdigest(),'generatedAt':datetime.now(timezone.utc).isoformat(),'files':{name:hashlib.sha256(data).hexdigest() for name,data in files.items()}}
+    previous,upstreams,years=merge_base(base,files,year)
+    previous.update(files);files=previous;years=sorted(set(years+[year]))
+    upstreams[str(year)]={'sha256':hashlib.sha256(raw).hexdigest(),'source':dataset['meta'].get('source',SOURCE_URL),'generatedAt':dataset['meta'].get('generated_at'),'timezoneCrossChecks':dataset['meta'].get('timezoneCrossChecks',{})}
+    files['ATTRIBUTION.txt']=(f'Data: İmsakiyem published annual data; upstream declares Diyanet İşleri Başkanlığı as source.\n{SOURCE_URL}\nYears: {", ".join(map(str,years))}\nSee manifest.json upstreams for per-year provenance.\nThis is not a Diyanet-operated distribution service.\nUpstream project license is preserved in SOURCE-LICENSE.txt.\n').encode()
+    manifest={'version':1,'years':years,'regionCount':len(regions),'source':SOURCE_URL,'upstreamSha256':hashlib.sha256(raw).hexdigest(),'upstreams':upstreams,'generatedAt':datetime.now(timezone.utc).isoformat(),'files':{name:hashlib.sha256(data).hexdigest() for name,data in files.items()}}
     files['manifest.json']=compact(manifest)
     output=Path(output)
     # The output directory must be new, preventing stale district/year remnants.
@@ -74,7 +96,8 @@ def prepare(source, districts, states, license_path, output):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     for key in ('source','districts','states','license','output'):parser.add_argument('--'+key,required=True)
+    parser.add_argument('--merge-from',type=Path,help='Verified existing dataset to preserve alongside the new year')
     args=parser.parse_args()
-    try:prepare(args.source,args.districts,args.states,args.license,args.output)
+    try:prepare(args.source,args.districts,args.states,args.license,args.output,base=args.merge_from)
     except (ValueError,KeyError,TypeError) as error:parser.exit(2,f'Invalid prayer data: {error}\n')
 if __name__=='__main__':main()

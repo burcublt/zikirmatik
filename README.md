@@ -98,6 +98,18 @@ Teknik kaynaklar: [Kurulum](https://developers.google.com/admob/flutter/quick-st
 - İzin yalnız hatırlatma açılırken istenir; reddedilirse tercih kapalı kalır.
 - Yayın bağlantıları için `--dart-define=PRIVACY_POLICY_URL=https://...` ve `--dart-define=CONTACT_EMAIL=...` verin. URL yoksa yerel gizlilik özeti açılır; e-posta yoksa iletişim satırı gösterilmez.
 
+## Uzaktan duyurular (Firebase Cloud Messaging)
+
+Duyurular özelliği Android ve iOS'ta, kullanıcı Ayarlar > Hatırlatmalar bölümündeki **Duyurular** anahtarını açınca izin ister ve cihazı `announcements` konusuna abone eder. Firebase Console'da yeni bildirim oluştururken konu (`announcements`) hedeflenebilir. Uygulama açıkken de bildirim gösterilir; kapalıyken sistem bildirimi gösterir.
+
+Firebase projesi bu depoya bağlı değildir. Bildirimleri etkinleştirmeden önce:
+
+1. Firebase Console'da proje oluşturup Android uygulamasını `com.example.zikirmatik` geliştirme kimliğiyle ve iOS uygulamasını kullandığınız Bundle ID ile kaydedin. Yayın kimlikleri değişirse Firebase'e yayın kimliklerini de ekleyin.
+2. FlutterFire CLI ile platform yapılandırmalarını ekleyin: `dart pub global activate flutterfire_cli` ve `flutterfire configure --project=<firebase-project-id>`. iOS için Firebase Console'da APNs anahtarını da yükleyin ve Xcode'da Push Notifications yeteneğini etkinleştirin.
+3. Uygulamayı Android/iOS cihazda çalıştırın, Duyurular anahtarını açıp izin verin. Firebase Console'dan `announcements` konusuna test bildirimi gönderin.
+
+Firebase yapılandırması yoksa uygulama mevcut özelliklerle çalışmaya devam eder; Duyurular anahtarını açma girişimi kurulum yönergesini gösterir. FCM, Firebase'in fiyatlandırmasında ücretsiz üründür; Console'dan elle gönderim için bu projede sunucu veya Cloud Functions gerekmez.
+
 Android emülatörü API 32 üzerinde yeni özelliklerin testi:
 
 ```sh
@@ -130,14 +142,14 @@ iOS için `flutter build ios --debug --no-codesign` başarılıdır; imzalama ve
 
 ## Namaz vakitleri
 
-Türkiye ve KKTC için 2026 yıllık Diyanet takvimi, İmsakiyem veri setinden doğrulanıp uygulamaya eklendi. İl/takvim bölgesi seçimi ve vakitler internet olmadan çalışır. GPS bölge adlarıyla tam eşleşmezse kullanıcı seçim yapar; rastgele yakın bölge seçilmez. Eski AlAdhan Türkiye kayıtları bu takvimle karıştırılmaz.
+Türkiye ve KKTC için 2026 ve 2027 yıllık Diyanet kaynaklı takvimler, İmsakiyem verisinden doğrulanıp uygulamaya eklendi. Her yıl 880 takvim bölgesini kapsar. İl/takvim bölgesi seçimi ve vakitler internet olmadan çalışır. GPS bölge adlarıyla tam eşleşmezse kullanıcı seçim yapar; rastgele yakın bölge seçilmez. Eski AlAdhan Türkiye kayıtları bu takvimle karıştırılmaz.
 
 Ana sayfanın üst kartı sıradaki namazı ve geri sayımı gösterir; “kaldı” yanında ok yoktur. Kart günlük altı vakit listesine açılır. Diğer ülkelerde mevcut AlAdhan hesaplanan vakit yolu sürer ve kaynak ayrı belirtilir.
 
 - iOS konum derlemesi için `BYPASS_PERMISSION_LOCATION_ALWAYS=1` kullanılır.
 - Konum izni yalnız kullanıcı eylemiyle istenir. Elle takvim seçimi konum iznine bağlı değildir.
-- 2027 takvimi henüz yoktur; geçmiş yıldan vakit taşınmaz veya tahmin edilmez.
-- Şu an sunucu/CDN yok. `build/prayer-data-2026.zip` HTTPS statik barındırmaya hazırdır; henüz yayımlanmadı.
+- 2026 korunur; yerel tarih 2027 olduğunda 2027 takvimi otomatik kullanılır. 31 Aralık gecesi ertesi yılın imsak vakti de yüklenir. Olmayan 2028 takvimi tahmin edilmez.
+- Şu an sunucu/CDN yok. `build/prayer-data-2026-2027.zip` HTTPS statik barındırmaya hazırdır; henüz yayımlanmadı.
 - Sunucu hazır olduğunda `--dart-define=PRAYER_DATA_BASE_URL=https://...` ile yıllık güncelleme açılabilir. Varsayılan paketli takvimdir.
 
 Yalnız ilgili kontroller:
@@ -166,3 +178,28 @@ flutter test test/features/qibla
 ```
 
 12 hedefli test başarılı; Android ve imzasız iOS debug derlemesi başarılı. Gerçek telefonun pusula sensörü, manyetik etkileşim ve yön doğruluğu fiziksel cihazda ayrıca doğrulanmalıdır. Önizleme testi örnek İstanbul konumu ve sensör verisi kullanır; gerçek ölçüm değildir.
+
+## Reklam hataları ve iPhone test paketi
+
+- Başarısız reklam alanı tamamen kapanır; ilk isteğin ardından en fazla üç yeniden deneme 30 / 60 / 120 saniye bekler.
+- Arka planda reklam isteği yapılmaz. Geri dönüşte en az 30 saniyelik istek aralığı korunur. Ekran kapatılınca ve reklam izni kalkınca istek, zamanlayıcı ve kaynaklar bırakılır. Geç yanıt yeni reklamın durumunu değiştirmez.
+- Başarılı banner için uygulama ek yenileme başlatmaz; varsa SDK'nın kendi yenilemesi sürer. Yükleme/hazırlık yanıtı 25 saniyede gelmezse alan kapatılıp aynı sınırlı hata akışı kullanılır.
+
+Yalnız bu değişiklikleri doğrulamak için:
+
+```sh
+flutter test test/core/ads/ad_slot_lifecycle_test.dart
+flutter test integration_test/ad_slot_smoke_test.dart -d TEST_CIHAZI
+python3 -B -m unittest discover -s tests/ios_test_build -v
+```
+
+SDK testi yalnız native/banner bileşenlerini açar; diğer uygulama ekranlarını dolaşmaz, reklamları tıklamaz ve Google test kimliklerini zorunlu tutar. 14 Kasım 2026'da iOS simülatöründe ikisi de yüklendi. Fiziksel iOS reklam gösterimi ayrıca doğrulanmalıdır.
+
+Eski iPhone paketi kurulumunu önlemek için güncel kaynaktan derleyen komut:
+
+```sh
+python3 scripts/build_ios_test.py --flutter /tam/yol/flutter
+python3 scripts/build_ios_test.py --flutter /tam/yol/flutter --device IPHONE_UDID
+```
+
+İlk komut yalnız Profile test paketi üretir; ikinci komut belirtilen telefona kurup açar. Kaynak/varlık özeti derlemenin öncesinde ve sonrasında karşılaştırılır; değişiklik olursa kurulum durur. Debug snapshot ve simülatör paketleri fiziksel telefona kurulmaz. `build/ios/test-build.json` kaynak özeti, kullanılan paket yolu ve derleme bilgilerini tutar. Mağazaya yükleme yapılmaz; release yapılandırması değiştirilmez.

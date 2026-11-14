@@ -11,11 +11,13 @@ class AppSettings {
     this.soundEnabled = false,
     this.themeMode = ThemeMode.dark,
     this.reminderEnabled = false,
+    this.pushNotificationsEnabled = false,
     this.reminderHour = 20,
     this.reminderMinute = 0,
     this.localeCode,
   });
   final bool vibrationEnabled, soundEnabled, reminderEnabled;
+  final bool pushNotificationsEnabled;
   final ThemeMode themeMode;
   final int reminderHour, reminderMinute;
   final String? localeCode;
@@ -28,6 +30,7 @@ class AppSettings {
     bool? vibrationEnabled,
     bool? soundEnabled,
     bool? reminderEnabled,
+    bool? pushNotificationsEnabled,
     ThemeMode? themeMode,
     int? reminderHour,
     int? reminderMinute,
@@ -38,6 +41,8 @@ class AppSettings {
     soundEnabled: soundEnabled ?? this.soundEnabled,
     themeMode: themeMode ?? this.themeMode,
     reminderEnabled: reminderEnabled ?? this.reminderEnabled,
+    pushNotificationsEnabled:
+        pushNotificationsEnabled ?? this.pushNotificationsEnabled,
     reminderHour: reminderHour ?? this.reminderHour,
     reminderMinute: reminderMinute ?? this.reminderMinute,
     localeCode: clearLocale ? null : localeCode ?? this.localeCode,
@@ -98,6 +103,7 @@ class DriftSettingsRepository implements SettingsRepository {
       soundEnabled: options['sound'] == true,
       themeMode: theme,
       reminderEnabled: options['reminder'] == true,
+      pushNotificationsEnabled: options['pushNotifications'] == true,
       reminderHour: validNumber('hour', 20, 23),
       reminderMinute: validNumber('minute', 0, 59),
     );
@@ -114,6 +120,7 @@ class DriftSettingsRepository implements SettingsRepository {
       'sound': settings.soundEnabled,
       'theme': settings.themeMode.name,
       'reminder': settings.reminderEnabled,
+      'pushNotifications': settings.pushNotificationsEnabled,
       'hour': settings.reminderHour,
       'minute': settings.reminderMinute,
     }),

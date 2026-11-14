@@ -385,6 +385,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dailyReminder => 'Daily Reminder';
 
   @override
+  String get pushNotifications => 'Announcements';
+
+  @override
+  String get pushNotificationsDescription => 'Receive app announcements';
+
+  @override
+  String get pushSetupRequired =>
+      'Notifications are not connected to a Firebase project yet. Complete the setup steps in the README.';
+
+  @override
   String get reminderTime => 'Reminder Time';
 
   @override
@@ -405,11 +415,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notificationPermissionRequired =>
-      'Allow notifications in your device settings to enable reminders.';
+      'Allow notifications in your device settings to enable them.';
 
   @override
   String get privacySummary =>
-      'Your dhikr records, favorites and app preferences are stored in a local database on your device. The app uses Google AdMob to display ads. Google may process advertising and device information under its own privacy policy. When required, you can change ad privacy options in Settings. Türkiye and Northern Cyprus timetables are read from the bundled annual dataset. For calculated times in other countries, approximate coordinates are sent to AlAdhan. City and address lookups use the device’s location/address service. Timetable updates can be fetched by region ID from the configured data server. Prayer times and your chosen location are saved on your device for offline use. Your location is not tracked in the background.';
+      'Your dhikr records, favorites and app preferences are stored in a local database on your device. If you enable announcements, Firebase Cloud Messaging processes your device\'s notification token to deliver them. The app uses Google AdMob to display ads. Google may process advertising and device information under its own privacy policy. When required, you can change ad privacy options in Settings. Türkiye and Northern Cyprus timetables are read from the bundled annual dataset. For calculated times in other countries, approximate coordinates are sent to AlAdhan. City and address lookups use the device’s location/address service. Timetable updates can be fetched by region ID from the configured data server. Prayer times and your chosen location are saved on your device for offline use. Your location is not tracked in the background.';
 
   @override
   String get googlePrivacy => 'Google Privacy Policy';

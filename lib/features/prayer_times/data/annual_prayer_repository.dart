@@ -101,6 +101,8 @@ class AnnualPrayerRepository implements PrayerRepository {
         cached?.source == 'diyanet-annual' &&
         cached!.location.annualRegionId == region.id &&
         cached.covers(now()) &&
+        (!(local.month == 12 && local.day == 31) ||
+            cached.dayAt(tz.TZDateTime(zone, local.year + 1, 1, 1)) != null) &&
         cached.fetchedAt != null &&
         now().difference(cached.fetchedAt!) < const Duration(hours: 24)) {
       final result = PrayerSchedule(

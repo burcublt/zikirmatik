@@ -201,7 +201,7 @@ void main() {
       addTearDown(db.close);
       final client = MockClient((r) async => http.Response('{}', 404));
       addTearDown(client.close);
-      final end = DateTime.utc(2026, 12, 31, 20);
+      final end = DateTime.utc(2027, 12, 31, 20);
       final repo = AnnualPrayerRepository(db, client, asset, now: () => end);
       final result = await repo.load(selected);
       expect(result.dayAt(end), isNotNull);
@@ -211,7 +211,7 @@ void main() {
           db,
           client,
           asset,
-          now: () => DateTime.utc(2027, 1, 1, 10),
+          now: () => DateTime.utc(2028, 1, 1, 10),
         ).load(selected, cached: result),
         throwsA(isA<PrayerCalendarUnavailable>()),
       );

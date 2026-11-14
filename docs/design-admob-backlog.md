@@ -14,6 +14,20 @@ Proje: /Users/burcubalta/Desktop/development/zikirmatik.
 - Reklam kreatifindeki fotoğraf ve metin AdMob tarafından sağlanır; referanstaki reklam görseli sabit içerik olarak kopyalanmaz.
 - Ekrandaki örnek sayılar gerçek kayıtlarla hesaplanır; sabit 532, %78 veya 2.5 saat gösterilmez.
 
+## Güncel kalan işler — 14 Kasım 2026
+
+Önceki turların ayrıntıları aşağıda tarihsel olarak korunur. Güncel dış bağımlılıklar:
+
+- [ ] Gerçek uygulama ve AdMob yayın kimlikleri, Android upload imzası ve mağaza beyanları.
+- [ ] Kullanıcının sonraya bıraktığı gizlilik URL'si ve iletişim e-postası.
+- [ ] Duyurular için kullanıcının Firebase projesi, platform yapılandırmaları ve iOS APNs yetkisi.
+- [ ] Kullanıcıyla fiziksel konum/kıble kalibrasyonu ve fiziksel iPhone reklam gösterimi kontrolü.
+- [x] 2027 namaz takvimini edinme/doğrulama: 880 bölge, 321.200 gün; 2026 korunarak paketlendi.
+- [ ] Diğer ülkelerin yerel resmî takvim sağlayıcıları.
+- [ ] Takvim CDN/sunucu yayını; kullanıcının kararıyla şimdilik yalnız dağıtım ZIP'i hazır.
+
+Bu turda reklam hata/tekrar/arka plan/kaynak temizliği tamamlandı. Eski iPhone paketi yükleme riskine karşı güncel kaynaktan Profile derlemesi yapan `scripts/build_ios_test.py` eklendi. Saat seçimi, bildirim güncellemesi ve kullanıcının diğer kaynak değişiklikleri korunur.
+
 ## Mevcut durum
 
 Flutter + Riverpod + Drift. Sayaç, hedef, günlük kayıt, seri, zikir ekleme/düzenleme/silme ve TR/EN/AR yerelleştirmesi mevcut. Dört sekme mevcut. Başlangıçta AdMob yoktu. İlk uygulama turunda google_mobile_ads 9.2.0, Google test kimlikleri, UMP, liste içi native template ve adaptive banner eklendi.
@@ -72,8 +86,9 @@ Flutter + Riverpod + Drift. Sayaç, hedef, günlük kayıt, seri, zikir ekleme/d
 - [x] SDK başlangıcını ve platform desteğini yönetme; web/masaüstünde reklam isteği yapmama.
 - [x] Native kart: Android/iOS özel layout; medya, metin, çağrı düğmesi, Ad etiketi ve SDK tıklama yönetimi.
 - [x] Banner: ekran genişliğine uygun adaptive boyut ve güvenli alan.
-- [ ] Yükleme hatasında alanı kapatma; dispose, sekme geçişi, tekrar deneme ve yinelenen istek yönetimi.
-- [ ] Android/iOS test reklamlarını cihazda doğrulama. Canlı reklamlarla geliştirme testi yapılmaz.
+- [x] Yükleme hatasında alanı kapatma; kaynak temizliği, sınırlı tekrar deneme, arka plan ve geç yanıt yönetimi. 12 hedefli reklam testi başarılı.
+- [x] Android Play Store emülatöründe ve iOS simülatöründe native/banner Google test reklamları doğrulandı.
+- [ ] Fiziksel iPhone üzerinde native/banner gösterimini ayrıca doğrulama; canlı reklamlarla geliştirme testi yapılmaz.
 - [ ] Yayın öncesi gerçek app ID + native/banner unit ID, AdMob gizlilik mesajı ve mağaza beyanları.
 
 ### 7. Doğrulama ve yayın
@@ -82,7 +97,7 @@ Flutter + Riverpod + Drift. Sayaç, hedef, günlük kayıt, seri, zikir ekleme/d
 - [x] Favori migration, süre/istatistik hesapları ve reklam yerleşimi için davranış testleri.
 - [ ] Android/iOS ekran görüntülerini aynı boyutta referansla karşılaştırma; henüz birebir eşleşme iddiası yok.
 - [ ] Offline açılış, reklam gelmemesi, izin reddi, büyük metin, RTL ve uygulamaya geri dönüş testi.
-- [ ] Android paket adı com.example.zikirmatik yerine yayın kimliği; release signing şu an debug anahtarı kullanıyor.
+- [ ] Gerçek Android yayın kimliği ve upload imzasını sağlama. Release debug imzası fallback kaldırıldı; doğrulama altyapısı hazır.
 - [x] README ve kurulum/yayın talimatları.
 
 ## Önerilen uygulama sırası
@@ -190,5 +205,36 @@ Canlı AdMob kimlikleri ilk geliştirme adımını engellemez; test kimlikleriyl
 - [x] Veri dönüştürücü ve manifest özeti doğrulayan dağıtım ZIP'i.
 - [x] Kullanıcı kararı: sunucu şu an yok; yalnız yüklenmeye hazır paket hazırlanacak.
 - [ ] HTTPS sunucu/CDN yayımlama ve uygulama adresini yapılandırma.
-- [ ] 2027 verisini edinme, doğrulama ve dağıtma.
+- [x] 2027 verisini edinme, doğrulama ve yerel dağıtım paketine ekleme; sunucuya yayımlama ertelendi.
 - [ ] Diğer ülkelerin yerel resmî takvim sağlayıcıları; mevcut hesaplanan vakit akışı ayrı kaynak etiketiyle sürüyor.
+
+## Son doğrulama — 14 Kasım 2026
+
+- İlgili 27 Flutter testi ve 4 veri hazırlama testi başarılı; tüm ekran testleri çalıştırılmadı.
+- Kod analizi temiz. Android debug ve imzalı iOS profile test paketleri derlendi.
+- Güncel iOS paketi bağlı iPhone 14 Pro'ya kuruldu; com.burcubalta.zikirmatik.dev uygulaması başarıyla başlatıldı. Bölge seçimi ve saatlerin fiziksel ekranda kullanıcıyla kontrolü ayrıca yapılacak.
+- build/prayer-data-2026.zip: 4.043.811 bayt, 884 ZIP girdisi; dosya özetleri ve ZIP bütünlüğü doğrulandı. Sunucuya yayımlanmadı.
+
+## Reklam yaşam döngüsü ve test kurulumu — 14 Kasım 2026
+
+- 12 reklam davranış testi başarılı: geri çekilme aralığı, deneme sınırı, kaynak temizliği, izin değişimi, arka plan, boyut değişimi, zaman aşımı ve geç yanıtlar.
+- Hedefli iOS simülatör SDK testinde nativeLoaded=true, bannerLoaded=true, consentCanRequest=true. Diğer ekranlar test edilmedi.
+- Güncel iPhone test paketi için kaynak özeti doğrulaması ve AOT/Profile kontrolü eklendi; 5 Python testi başarılı.
+- Bu turda yalnız reklam kodu, ilgili testler, test paketleme aracı ve iş listesi/README değiştirildi.
+
+## 2027 yıllık takvim — 14 Kasım 2026
+
+- 2026 ve 2027 birlikte paketlenir; yıl değişimi yerel tarihle otomatik olur.
+- 31 Aralık önbelleği ertesi yılın imsak vaktini içermezse yeniden yüklenir.
+- Yılları birleştirme mevcut dosya özetlerini doğrular; 2026 verisini değiştirmez.
+- Sağlayıcının saat dilimi etiketi tutarsızsa tüm yılın saatleri v1 yanıtıyla ayrıca karşılaştırılır; saat dönüşümü veya vakit tahmini yapılmaz.
+- Yalnız yıllık veri, yıl geçişi ve ilgili paketleme kontrolleri çalıştırılır; diğer ekranlar yeniden test edilmez.
+- Sunucu, gerçek uygulama/AdMob kimlikleri ve diğer yayın bilgileri kullanıcı kararıyla en sona bırakıldı.
+
+### 2027 hedefli kontrol sonucu
+
+- Yalnız yıllık takvim ve yıl geçişinin 14 Flutter testi ile 12 veri testi başarılı; diğer ekranlar yeniden test edilmedi.
+- Değişen üç Dart dosyasının analizi temiz.
+- Dağıtım: `build/prayer-data-2026-2027.zip`, 8.066.684 bayt, 1.764 ZIP girdisi; bütünlük ve manifestteki tüm özetler doğrulandı.
+- 2026 bölge dosyaları ve katalog değişmedi; kullanıcının ayarlar/saat seçimi, reklam ve bildirim dosyaları korundu.
+- Güncel kaynakla imzalı iOS Profile derlemesi başarılı; paketin 880 adet 2027 dosyası kaynakla birebir doğrulandı. Fiziksel iPhone erişilemediği için bu sürüm telefona kurulmadı.
