@@ -9,14 +9,14 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get appTitle => 'السبحة';
+  String get appTitle => 'Vaktim';
 
   @override
   String get loadingInfrastructure => 'جارٍ تجهيز تجربتك';
 
   @override
   String get screenReaderInfrastructureReady =>
-      'البنية الأساسية لتطبيق السبحة جاهزة';
+      'البنية الأساسية لتطبيق Vaktim جاهزة';
 
   @override
   String get home => 'الرئيسية';
@@ -406,7 +406,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get contactUs => 'تواصل معنا';
 
   @override
-  String get peacefulLife => 'لحياة مليئة بالسكينة\nالسبحة';
+  String get peacefulLife => 'لحياة مليئة بالسكينة\nVaktim';
 
   @override
   String get appDescription => 'احسب أذكارك اليومية وحدد أهدافك وتابع تقدمك.';
@@ -580,4 +580,67 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get prayerRegionNoResults => 'لم يتم العثور على منطقة تقويم مطابقة.';
+
+  @override
+  String get zikrDetailTitle => 'تفاصيل الذكر';
+
+  @override
+  String get detailTotal => 'إجمالي التسبيح';
+
+  @override
+  String get detailProgress => 'تقدم الهدف';
+
+  @override
+  String get detailLast => 'آخر تسبيح';
+
+  @override
+  String get detailNoLast => 'لا توجد تسبيحات بعد';
+
+  @override
+  String get detailStart => 'ابدأ';
+
+  @override
+  String get detailHistory => 'عرض السجل';
+
+  @override
+  String get detailAllTime => 'كل الأوقات';
+
+  @override
+  String get detailWeek => 'هذا الأسبوع';
+
+  @override
+  String get detailMonth => 'هذا الشهر';
+
+  @override
+  String get detailYear => 'هذا العام';
+
+  @override
+  String get detailNoHistory => 'لا توجد سجلات لهذه الفترة.';
+
+  @override
+  String get prayerAlertsTitle => 'المنبهات والتذكيرات';
+
+  @override
+  String get prayerAlertsDescription => 'يمكنك ضبط تذكير لكل صلاة';
+
+  @override
+  String get prayerAlertOnTime => 'في وقت الصلاة';
+
+  @override
+  String prayerAlertBefore(int count) {
+    return 'قبل $count دقيقة';
+  }
+
+  @override
+  String prayerAlertTime(String time) {
+    return 'الوقت: $time';
+  }
+
+  @override
+  String get prayerAlertUpdateFailed =>
+      'تحقق من إذن الإشعارات وتقويم الصلاة المحدد.';
+
+  @override
+  String get prayerAlertPermissionInfo =>
+      'تتطلب التنبيهات إذن الجهاز. تُجدول الصلوات القادمة ويُحدّث الجدول عند فتح التطبيق.';
 }

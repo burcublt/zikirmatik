@@ -9,13 +9,13 @@ class AppLocalizationsTr extends AppLocalizations {
   AppLocalizationsTr([String locale = 'tr']) : super(locale);
 
   @override
-  String get appTitle => 'Zikirmatik';
+  String get appTitle => 'Vaktim';
 
   @override
   String get loadingInfrastructure => 'Deneyiminiz hazırlanıyor';
 
   @override
-  String get screenReaderInfrastructureReady => 'Zikirmatik altyapısı hazır';
+  String get screenReaderInfrastructureReady => 'Vaktim altyapısı hazır';
 
   @override
   String get home => 'Ana Sayfa';
@@ -406,7 +406,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get contactUs => 'Bize Ulaşın';
 
   @override
-  String get peacefulLife => 'Huzur dolu bir yaşam için\nZikirmatik';
+  String get peacefulLife => 'Huzur dolu bir yaşam için\nVaktim';
 
   @override
   String get appDescription =>
@@ -584,4 +584,68 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get prayerRegionNoResults => 'Eşleşen takvim bölgesi bulunamadı.';
+
+  @override
+  String get zikrDetailTitle => 'Zikir Detayı';
+
+  @override
+  String get detailTotal => 'Toplam Çekim';
+
+  @override
+  String get detailProgress => 'Hedef İlerlemesi';
+
+  @override
+  String get detailLast => 'Son Çekim';
+
+  @override
+  String get detailNoLast => 'Henüz çekim yok';
+
+  @override
+  String get detailStart => 'Başla';
+
+  @override
+  String get detailHistory => 'Geçmişi Gör';
+
+  @override
+  String get detailAllTime => 'Tüm Zamanlar';
+
+  @override
+  String get detailWeek => 'Bu Hafta';
+
+  @override
+  String get detailMonth => 'Bu Ay';
+
+  @override
+  String get detailYear => 'Bu Yıl';
+
+  @override
+  String get detailNoHistory => 'Bu dönem için kayıt yok.';
+
+  @override
+  String get prayerAlertsTitle => 'Alarm ve Hatırlatmalar';
+
+  @override
+  String get prayerAlertsDescription =>
+      'Her namaz için ayrı bildirim ayarlayabilirsiniz';
+
+  @override
+  String get prayerAlertOnTime => 'Tam vaktinde';
+
+  @override
+  String prayerAlertBefore(int count) {
+    return '$count dakika önce';
+  }
+
+  @override
+  String prayerAlertTime(String time) {
+    return 'Vakti: $time';
+  }
+
+  @override
+  String get prayerAlertUpdateFailed =>
+      'Bildirim ayarlarını veya seçili namaz takvimini kontrol edin.';
+
+  @override
+  String get prayerAlertPermissionInfo =>
+      'Bildirimler telefon iznine bağlıdır. Yaklaşan vakitler planlanır; daha sonraki vakitler uygulama açıldıkça yenilenir.';
 }

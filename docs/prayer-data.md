@@ -104,3 +104,11 @@ Sunucu/CDN ve gerçek yayın bilgileri kullanıcının kararıyla en sona bırak
 - Dağıtım: `build/prayer-data-2026-2027.zip`, 8.066.684 bayt, 1.764 ZIP girdisi; bütünlük ve manifestteki tüm özetler doğrulandı.
 - 2026 bölge dosyaları ve katalog değişmedi; kullanıcının ayarlar/saat seçimi, reklam ve bildirim dosyaları korundu.
 - Güncel kaynakla imzalı iOS Profile derlemesi başarılı; paketin 880 adet 2027 dosyası kaynakla birebir doğrulandı. Fiziksel iPhone erişilemediği için bu sürüm telefona kurulmadı.
+
+## Namaz vakti hatırlatmaları — 16 Kasım 2026
+
+- İmsak, öğle, ikindi, akşam ve yatsı için ayrı açma/kapama ve 0, 5, 10, 15, 20, 30, 45 veya 60 dakika öncesi seçenekleri bulunur; güneş için bildirim yoktur.
+- Bildirimler seçili takvimin saat diliminde hesaplanır, ayrı tercihler olarak saklanır ve telefonun bildirim iznini gerektirir. Mevcut zikir hatırlatması ve duyuru ayarları ayrıdır.
+- Bir seferde en fazla 50 yaklaşan bildirim, mevcut takvim kapsamı kadar planlanır. Uygulama açılınca, vakitler veya tercihler değişince ve uygulama açıkken periyodik olarak plan yenilenir. Uygulama uzun süre açılmazsa planın sonundan sonraki vakitler için yeni bildirimler kendiliğinden eklenmez.
+- Android yaklaşık zamanlı planlama kullanır; sistem bildirimi geciktirebilir. Bildirimler fiziksel cihazda henüz doğrulanmadı.
+- Bu değişiklikte yalnız bildirim planlama, tercih, izin ve yeni ekran için altı hedefli test çalıştırıldı.

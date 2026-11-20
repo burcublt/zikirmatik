@@ -25,7 +25,7 @@ class FirebasePushNotificationService implements PushNotificationService {
   static const _channel = AndroidNotificationChannel(
     _topic,
     'Announcements',
-    description: 'Zikirmatik announcements',
+    description: 'Vaktim announcements',
     importance: Importance.high,
   );
 
@@ -125,7 +125,7 @@ class FirebasePushNotificationService implements PushNotificationService {
           android: AndroidNotificationDetails(
             _topic,
             'Announcements',
-            channelDescription: 'Zikirmatik announcements',
+            channelDescription: 'Vaktim announcements',
             importance: Importance.high,
             priority: Priority.high,
           ),

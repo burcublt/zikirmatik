@@ -9,14 +9,14 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Zikirmatik';
+  String get appTitle => 'Vaktim';
 
   @override
   String get loadingInfrastructure => 'Preparing your experience';
 
   @override
   String get screenReaderInfrastructureReady =>
-      'Zikirmatik infrastructure is ready';
+      'Vaktim infrastructure is ready';
 
   @override
   String get home => 'Home';
@@ -407,7 +407,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contactUs => 'Contact Us';
 
   @override
-  String get peacefulLife => 'For a peaceful life\nZikirmatik';
+  String get peacefulLife => 'For a peaceful life\nVaktim';
 
   @override
   String get appDescription =>
@@ -587,4 +587,68 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get prayerRegionNoResults => 'No matching timetable region found.';
+
+  @override
+  String get zikrDetailTitle => 'Dhikr Details';
+
+  @override
+  String get detailTotal => 'Total Count';
+
+  @override
+  String get detailProgress => 'Goal Progress';
+
+  @override
+  String get detailLast => 'Last Count';
+
+  @override
+  String get detailNoLast => 'No counts yet';
+
+  @override
+  String get detailStart => 'Start';
+
+  @override
+  String get detailHistory => 'View History';
+
+  @override
+  String get detailAllTime => 'All Time';
+
+  @override
+  String get detailWeek => 'This Week';
+
+  @override
+  String get detailMonth => 'This Month';
+
+  @override
+  String get detailYear => 'This Year';
+
+  @override
+  String get detailNoHistory => 'No records for this period.';
+
+  @override
+  String get prayerAlertsTitle => 'Alarms and Reminders';
+
+  @override
+  String get prayerAlertsDescription =>
+      'Set a separate reminder for each prayer';
+
+  @override
+  String get prayerAlertOnTime => 'At prayer time';
+
+  @override
+  String prayerAlertBefore(int count) {
+    return '$count minutes before';
+  }
+
+  @override
+  String prayerAlertTime(String time) {
+    return 'Time: $time';
+  }
+
+  @override
+  String get prayerAlertUpdateFailed =>
+      'Check notification permission and your selected prayer calendar.';
+
+  @override
+  String get prayerAlertPermissionInfo =>
+      'Notifications require device permission. Upcoming prayers are scheduled and refreshed when the app is opened.';
 }

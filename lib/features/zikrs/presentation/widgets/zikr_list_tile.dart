@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:zikirmatik/core/database/app_database.dart';
 import 'package:zikirmatik/app/theme/app_palette.dart';
 import 'package:zikirmatik/core/localization/app_localizations_x.dart';
 import 'package:zikirmatik/features/zikrs/domain/zikr_definition.dart';
@@ -8,6 +10,8 @@ class ZikrListTile extends StatelessWidget {
     super.key,
     required this.zikr,
     required this.isActive,
+    this.progress,
+    this.progressReady = true,
     required this.onSelect,
     required this.onEdit,
     required this.onDelete,
@@ -15,6 +19,8 @@ class ZikrListTile extends StatelessWidget {
   });
   final ZikrDefinition zikr;
   final bool isActive;
+  final CounterProgressesData? progress;
+  final bool progressReady;
   final VoidCallback onSelect;
   final VoidCallback onEdit;
   final VoidCallback? onDelete;
@@ -23,6 +29,14 @@ class ZikrListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final count = progress?.currentCount ?? 0;
+    final target = progress?.targetCount ?? zikr.defaultTarget;
+    final ratio = target > 0
+        ? (count / target).clamp(0.0, 1.0).toDouble()
+        : 0.0;
+    final percentage = NumberFormat.percentPattern(
+      Localizations.localeOf(context).toString(),
+    ).format(ratio);
     final icons = [
       Icons.filter_vintage_outlined,
       Icons.mosque_outlined,
@@ -90,6 +104,58 @@ class ZikrListTile extends StatelessWidget {
                           fontSize: 12,
                         ),
                       ),
+                      if (progressReady) ...[
+                        const SizedBox(height: 7),
+                        LayoutBuilder(
+                          builder: (context, constraints) {
+                            final bar = ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: LinearProgressIndicator(
+                                value: ratio,
+                                minHeight: 7,
+                                backgroundColor: context.palette.elevatedGreen,
+                                color: const Color(0xFF80DE9A),
+                              ),
+                            );
+                            final label = Text(
+                              '${l10n.formattedCount(count)} / ${l10n.formattedCount(target)}',
+                              style: TextStyle(
+                                color: context.palette.cream,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            );
+                            final percent = Text(
+                              percentage,
+                              style: TextStyle(
+                                color: context.palette.softGold,
+                                fontSize: 11,
+                              ),
+                            );
+                            if (constraints.maxWidth < 220 ||
+                                MediaQuery.textScalerOf(context).scale(1) >
+                                    1.15) {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  bar,
+                                  const SizedBox(height: 4),
+                                  Wrap(spacing: 6, children: [label, percent]),
+                                ],
+                              );
+                            }
+                            return Row(
+                              children: [
+                                Expanded(child: bar),
+                                const SizedBox(width: 8),
+                                label,
+                                const SizedBox(width: 5),
+                                percent,
+                              ],
+                            );
+                          },
+                        ),
+                      ],
                     ],
                   ),
                 ),

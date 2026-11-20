@@ -1,8 +1,8 @@
 {
   "@@locale": "tr",
-  "appTitle": "Zikirmatik",
+  "appTitle": "Vaktim",
   "loadingInfrastructure": "Deneyiminiz hazırlanıyor",
-  "screenReaderInfrastructureReady": "Zikirmatik altyapısı hazır",
+  "screenReaderInfrastructureReady": "Vaktim altyapısı hazır",
   "home": "Ana Sayfa",
   "zikrs": "Zikirler",
   "quran": "Kur'an",
@@ -122,7 +122,7 @@
   "application": "Uygulama",
   "privacyPolicy": "Gizlilik Politikası",
   "contactUs": "Bize Ulaşın",
-  "peacefulLife": "Huzur dolu bir yaşam için\nZikirmatik",
+  "peacefulLife": "Huzur dolu bir yaşam için\nVaktim",
   "appDescription": "Günlük zikirlerinizi sayın, hedeflerinizi belirleyin ve ilerlemenizi takip edin.",
   "notificationPermissionRequired": "Bildirimleri etkinleştirmek için cihaz ayarlarından izin vermelisiniz.",
   "privacySummary": "Zikir kayıtlarınız, favorileriniz ve uygulama tercihleriniz cihazınızdaki yerel veritabanında saklanır. Duyuruları açarsanız Firebase Cloud Messaging bildirimleri iletmek için cihaz bildirim belirtecini işler. Uygulama reklam göstermek için Google AdMob kullanır. Google, reklam ve cihaz bilgilerini kendi gizlilik politikası kapsamında işleyebilir. Gerektiğinde reklam gizlilik tercihlerinizi Ayarlar ekranından değiştirebilirsiniz. Türkiye ve KKTC takvimleri cihazdaki yıllık veri setinden okunur. Diğer ülkelerde hesaplanan vakitler için yaklaşık koordinatlar AlAdhan servisine gönderilir. Şehir ve adres sorguları cihazın konum/adres hizmetini kullanır. Takvim güncellemeleri yapılandırılmış veri sunucusundan bölge kimliğiyle alınabilir. Alınan vakitler ve seçtiğiniz konum çevrim dışı kullanım için cihazda saklanır. Konum arka planda takip edilmez.",
@@ -188,5 +188,38 @@
   "prayerInternationalCity": "Diğer ülkelerde şehir ara",
   "prayerAnnualSource": "Kaynak: Diyanet takvimi • İmsakiyem veri seti",
   "prayerCalendarMissing": "Bu bölge için güncel takvim bulunamadı.",
-  "prayerRegionNoResults": "Eşleşen takvim bölgesi bulunamadı."
+  "prayerRegionNoResults": "Eşleşen takvim bölgesi bulunamadı.",
+  "zikrDetailTitle": "Zikir Detayı",
+  "detailTotal": "Toplam Çekim",
+  "detailProgress": "Hedef İlerlemesi",
+  "detailLast": "Son Çekim",
+  "detailNoLast": "Henüz çekim yok",
+  "detailStart": "Başla",
+  "detailHistory": "Geçmişi Gör",
+  "detailAllTime": "Tüm Zamanlar",
+  "detailWeek": "Bu Hafta",
+  "detailMonth": "Bu Ay",
+  "detailYear": "Bu Yıl",
+  "detailNoHistory": "Bu dönem için kayıt yok.",
+  "prayerAlertsTitle": "Alarm ve Hatırlatmalar",
+  "prayerAlertsDescription": "Her namaz için ayrı bildirim ayarlayabilirsiniz",
+  "prayerAlertOnTime": "Tam vaktinde",
+  "prayerAlertBefore": "{count} dakika önce",
+  "prayerAlertTime": "Vakti: {time}",
+  "prayerAlertUpdateFailed": "Bildirim ayarlarını veya seçili namaz takvimini kontrol edin.",
+  "prayerAlertPermissionInfo": "Bildirimler telefon iznine bağlıdır. Yaklaşan vakitler planlanır; daha sonraki vakitler uygulama açıldıkça yenilenir.",
+  "@prayerAlertBefore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@prayerAlertTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  }
 }

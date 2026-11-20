@@ -238,3 +238,16 @@ Canlı AdMob kimlikleri ilk geliştirme adımını engellemez; test kimlikleriyl
 - Dağıtım: `build/prayer-data-2026-2027.zip`, 8.066.684 bayt, 1.764 ZIP girdisi; bütünlük ve manifestteki tüm özetler doğrulandı.
 - 2026 bölge dosyaları ve katalog değişmedi; kullanıcının ayarlar/saat seçimi, reklam ve bildirim dosyaları korundu.
 - Güncel kaynakla imzalı iOS Profile derlemesi başarılı; paketin 880 adet 2027 dosyası kaynakla birebir doğrulandı. Fiziksel iPhone erişilemediği için bu sürüm telefona kurulmadı.
+
+## Diğer ülkeler için namaz vakitleri — 15 Kasım 2026
+
+Kullanıcı kararı: aşağıdaki işler yapılacaklar listesine alındı; sıradaki çalışma tasarım değişiklikleri olacak.
+
+- [ ] Ülke/bölge bazında güvenilir yerel resmî takvim sağlayıcılarını araştırma ve uygun olanları yıllık takvim sistemine ekleme.
+- [ ] Yerel takvim bulunmayan bölgelerde uygun varsayılan hesaplama yöntemini belirleme; ülke içinde farklı uygulamalar olabileceğini dikkate alma.
+- [ ] Kullanıcının hesaplama yöntemini ve ikindi hesabı için mezhep tercihini seçebilmesi; tercihleri kalıcı saklama.
+- [ ] Her vakit için yerel cami takvimine göre dakika düzeltmesi ekleme ve düzeltmeleri kalıcı saklama.
+- [ ] Kullanılan kaynak/yöntemi ve kullanıcı düzeltmelerini açıkça gösterme; hesaplanan vakitleri resmî takvim olarak sunmama.
+- [ ] Yalnız bu değişikliklere yönelik vakit, tarih/saat dilimi ve tercih kalıcılığı kontrolleri.
+
+Türkiye ve KKTC mevcut paketli yıllık takvimle devam eder; bu takvimlere hesaplama yöntemi seçimi uygulanmaz.

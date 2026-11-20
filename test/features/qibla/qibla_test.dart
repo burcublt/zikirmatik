@@ -125,7 +125,7 @@ void main() {
     }
     expect(tester.takeException(), isNull);
   });
-  testWidgets('kıble oku yeni pusula başlığıyla birlikte döner', (
+  testWidgets('Kâbe işareti telefon yönüne göre kıbleyi gösterir', (
     tester,
   ) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
@@ -133,50 +133,35 @@ void main() {
     final controller = StreamController<CompassHeading>.broadcast();
     addTearDown(controller.close);
     await mount(tester, stream: controller.stream);
-
-    double pointerAngle() {
-      final dial = tester.widget<CustomPaint>(
-        find.byWidgetPredicate(
-          (widget) =>
-              widget is CustomPaint && widget.painter is QiblaDialPainter,
+    final bearing = qiblaBearing(place.latitude, place.longitude)!;
+    final marker = find.byKey(const ValueKey('qibla-kaaba-marker'));
+    final dial = find.byWidgetPredicate(
+      (widget) => widget is CustomPaint && widget.painter is QiblaDialPainter,
+    );
+    for (final heading in [
+      bearing,
+      bearing - 90,
+      bearing + 90,
+      bearing + 180,
+      359.0,
+      1.0,
+    ]) {
+      controller.add(
+        CompassHeading(
+          magneticHeading: heading % 360,
+          trueHeading: heading % 360,
+          accuracy: CompassAccuracy.high,
         ),
       );
-      return (dial.painter! as QiblaDialPainter).turn * math.pi / 180;
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 1));
+      final center = tester.getCenter(dial);
+      final position = tester.getCenter(marker);
+      final turn = qiblaTurn(bearing, heading % 360) * math.pi / 180;
+      final distance = tester.getSize(dial).width / 2 - 35;
+      expect(position.dx, closeTo(center.dx + math.sin(turn) * distance, 0.01));
+      expect(position.dy, closeTo(center.dy - math.cos(turn) * distance, 0.01));
     }
-
-    controller.add(
-      CompassHeading(
-        magneticHeading: 110,
-        trueHeading: 110,
-        accuracy: CompassAccuracy.high,
-      ),
-    );
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 1));
-    expect(
-      pointerAngle(),
-      closeTo(
-        qiblaTurn(qiblaBearing(41.01, 28.98)!, 110) * math.pi / 180,
-        1e-6,
-      ),
-    );
-
-    controller.add(
-      CompassHeading(
-        magneticHeading: 120,
-        trueHeading: 120,
-        accuracy: CompassAccuracy.high,
-      ),
-    );
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 1));
-    expect(
-      pointerAngle(),
-      closeTo(
-        qiblaTurn(qiblaBearing(41.01, 28.98)!, 120) * math.pi / 180,
-        1e-6,
-      ),
-    );
     expect(tester.takeException(), isNull);
   });
   testWidgets('düşük doğrulukta hizalandı gösterilmez', (tester) async {

@@ -110,7 +110,7 @@ class LocalReminderService implements ReminderService {
       notificationDetails: const NotificationDetails(
         android: AndroidNotificationDetails(
           'daily_dhikr',
-          'Zikirmatik',
+          'Vaktim',
           channelDescription: 'Daily dhikr reminder',
           importance: Importance.defaultImportance,
         ),

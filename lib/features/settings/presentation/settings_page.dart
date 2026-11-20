@@ -10,6 +10,7 @@ import 'package:zikirmatik/core/localization/app_locales.dart';
 import 'package:zikirmatik/core/localization/app_localizations_x.dart';
 import 'package:zikirmatik/core/services/push_notification_service.dart';
 import 'package:zikirmatik/features/home/application/home_notifier.dart';
+import 'package:zikirmatik/features/prayer_times/presentation/prayer_reminders_page.dart';
 import 'package:zikirmatik/features/home/presentation/widgets/main_bottom_nav.dart';
 import 'package:zikirmatik/features/settings/application/settings_notifier.dart';
 import 'package:zikirmatik/features/settings/presentation/widgets/settings_tiles.dart';
@@ -28,7 +29,10 @@ class SettingsPage extends ConsumerStatefulWidget {
 
 class _SettingsPageState extends ConsumerState<SettingsPage> {
   static const _contactEmail = String.fromEnvironment('CONTACT_EMAIL');
-  static const _privacyUrl = String.fromEnvironment('PRIVACY_POLICY_URL');
+  static const _privacyUrl = String.fromEnvironment(
+    'PRIVACY_POLICY_URL',
+    defaultValue: 'https://burcublt.github.io/zikirmatik/',
+  );
   bool _busy = false;
   Future<void> _run(Future<void> Function() operation) async {
     if (_busy) return;
@@ -156,6 +160,12 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
               SettingsSectionHeader(title: l10n.reminders),
               SettingsSection(
                 children: [
+                  SettingsNavTile(
+                    icon: Icons.notifications_active_outlined,
+                    title: l10n.prayerAlertsTitle,
+                    subtitle: l10n.prayerAlertsDescription,
+                    onTap: () => showPrayerReminders(context),
+                  ),
                   SettingsToggleTile(
                     icon: Icons.campaign_outlined,
                     title: l10n.pushNotifications,

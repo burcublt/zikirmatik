@@ -103,7 +103,7 @@ abstract class AppLocalizations {
   /// Application name
   ///
   /// In en, this message translates to:
-  /// **'Zikirmatik'**
+  /// **'Vaktim'**
   String get appTitle;
 
   /// Infrastructure loading text
@@ -115,7 +115,7 @@ abstract class AppLocalizations {
   /// Accessibility label for the startup screen
   ///
   /// In en, this message translates to:
-  /// **'Zikirmatik infrastructure is ready'**
+  /// **'Vaktim infrastructure is ready'**
   String get screenReaderInfrastructureReady;
 
   /// Home navigation label
@@ -835,7 +835,7 @@ abstract class AppLocalizations {
   /// No description provided for @peacefulLife.
   ///
   /// In en, this message translates to:
-  /// **'For a peaceful life\nZikirmatik'**
+  /// **'For a peaceful life\nVaktim'**
   String get peacefulLife;
 
   /// No description provided for @appDescription.
@@ -1149,6 +1149,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No matching timetable region found.'**
   String get prayerRegionNoResults;
+
+  /// No description provided for @zikrDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Dhikr Details'**
+  String get zikrDetailTitle;
+
+  /// No description provided for @detailTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Count'**
+  String get detailTotal;
+
+  /// No description provided for @detailProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Goal Progress'**
+  String get detailProgress;
+
+  /// No description provided for @detailLast.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Count'**
+  String get detailLast;
+
+  /// No description provided for @detailNoLast.
+  ///
+  /// In en, this message translates to:
+  /// **'No counts yet'**
+  String get detailNoLast;
+
+  /// No description provided for @detailStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get detailStart;
+
+  /// No description provided for @detailHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'View History'**
+  String get detailHistory;
+
+  /// No description provided for @detailAllTime.
+  ///
+  /// In en, this message translates to:
+  /// **'All Time'**
+  String get detailAllTime;
+
+  /// No description provided for @detailWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'This Week'**
+  String get detailWeek;
+
+  /// No description provided for @detailMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'This Month'**
+  String get detailMonth;
+
+  /// No description provided for @detailYear.
+  ///
+  /// In en, this message translates to:
+  /// **'This Year'**
+  String get detailYear;
+
+  /// No description provided for @detailNoHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'No records for this period.'**
+  String get detailNoHistory;
+
+  /// No description provided for @prayerAlertsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Alarms and Reminders'**
+  String get prayerAlertsTitle;
+
+  /// No description provided for @prayerAlertsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a separate reminder for each prayer'**
+  String get prayerAlertsDescription;
+
+  /// No description provided for @prayerAlertOnTime.
+  ///
+  /// In en, this message translates to:
+  /// **'At prayer time'**
+  String get prayerAlertOnTime;
+
+  /// No description provided for @prayerAlertBefore.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} minutes before'**
+  String prayerAlertBefore(int count);
+
+  /// No description provided for @prayerAlertTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Time: {time}'**
+  String prayerAlertTime(String time);
+
+  /// No description provided for @prayerAlertUpdateFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Check notification permission and your selected prayer calendar.'**
+  String get prayerAlertUpdateFailed;
+
+  /// No description provided for @prayerAlertPermissionInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications require device permission. Upcoming prayers are scheduled and refreshed when the app is opened.'**
+  String get prayerAlertPermissionInfo;
 }
 
 class _AppLocalizationsDelegate

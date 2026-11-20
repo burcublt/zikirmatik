@@ -151,24 +151,7 @@ class _QiblaPageState extends ConsumerState<QiblaPage>
                           textAlign: TextAlign.center,
                         ),
                       ),
-                    Text(
-                      l.qiblaDirection,
-                      style: TextStyle(
-                        color: context.palette.gold,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    if (bearing != null)
-                      Text(
-                        '${bearing.round()}°',
-                        textDirection: TextDirection.ltr,
-                        style: const TextStyle(
-                          fontSize: 36,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 12),
                     if (bearing == null)
                       Text(l.qiblaUndefined, textAlign: TextAlign.center)
                     else
@@ -218,26 +201,84 @@ class _QiblaPageState extends ConsumerState<QiblaPage>
                               : l.qiblaTurnRight(turn.abs().round());
                           return Column(
                             children: [
-                              LayoutBuilder(
-                                builder: (context, c) => Center(
-                                  child: SizedBox.square(
-                                    dimension: math.min(c.maxWidth, 340),
-                                    child: Semantics(
-                                      label:
-                                          '${l.qiblaDirection} ${bearing.round()}°. $hint',
-                                      child: CustomPaint(
-                                        painter: QiblaDialPainter(
-                                          heading: heading.trueHeading!,
-                                          turn: turn,
-                                          gold: context.palette.gold,
-                                          northLabel: l.qiblaNorthInitial,
-                                          eastLabel: l.qiblaEastInitial,
-                                          southLabel: l.qiblaSouthInitial,
-                                          westLabel: l.qiblaWestInitial,
+                              QiblaCompassDial(
+                                heading: heading.trueHeading!,
+                                bearing: bearing,
+                                turn: turn,
+                                hint: hint,
+                              ),
+                              const SizedBox(height: 16),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                  horizontal: 16,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: context.palette.surfaceGreen,
+                                  borderRadius: BorderRadius.circular(14),
+                                  border: Border.all(
+                                    color: context.palette.gold.withValues(
+                                      alpha: 0.6,
+                                    ),
+                                  ),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.explore_outlined,
+                                      color: context.palette.gold,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            l.qiblaDirection,
+                                            style: TextStyle(
+                                              color: context.palette.mutedText,
+                                            ),
+                                          ),
+                                          Text(
+                                            '${bearing.round()}°',
+                                            textDirection: TextDirection.ltr,
+                                            style: TextStyle(
+                                              color: context.palette.cream,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 38,
+                                      width: 1,
+                                      color: context.palette.gold.withValues(
+                                        alpha: 0.6,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Icon(
+                                      Icons.location_on_outlined,
+                                      color: context.palette.gold,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Text(
+                                        place.label.isEmpty
+                                            ? l.prayerCurrentLocation
+                                            : place.label,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          color: context.palette.cream,
+                                          fontWeight: FontWeight.w600,
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
                               ),
                               const SizedBox(height: 20),
@@ -281,6 +322,149 @@ class _QiblaPageState extends ConsumerState<QiblaPage>
       ),
     );
   }
+}
+
+/// The top of the dial represents the phone's top edge; the marker moves to
+/// the Kaaba's direction relative to that edge as the phone turns.
+class QiblaCompassDial extends StatelessWidget {
+  const QiblaCompassDial({
+    super.key,
+    required this.heading,
+    required this.bearing,
+    required this.turn,
+    required this.hint,
+  });
+  final double heading, bearing, turn;
+  final String hint;
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final side = math.min(constraints.maxWidth, 340.0);
+        final center = side / 2;
+        const markerSize = 44.0;
+        final orbit = center - 35;
+        final angle = turn * math.pi / 180;
+        final point = Offset(
+          center + math.sin(angle) * orbit,
+          center - math.cos(angle) * orbit,
+        );
+        return Center(
+          child: SizedBox.square(
+            dimension: side,
+            child: Semantics(
+              label: '${l.qiblaDirection} ${bearing.round()}°. $hint',
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: CustomPaint(
+                      painter: QiblaDialPainter(
+                        heading: heading,
+                        turn: turn,
+                        gold: context.palette.gold,
+                        northLabel: l.qiblaNorthInitial,
+                        eastLabel: l.qiblaEastInitial,
+                        southLabel: l.qiblaSouthInitial,
+                        westLabel: l.qiblaWestInitial,
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: SizedBox(
+                      width: side * 0.36,
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              '${bearing.round()}°',
+                              textDirection: TextDirection.ltr,
+                              style: TextStyle(
+                                color: context.palette.cream,
+                                fontSize: 38,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              l.qiblaDirection,
+                              style: TextStyle(
+                                color: context.palette.gold,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: point.dx - markerSize / 2,
+                    top: point.dy - markerSize / 2,
+                    child: ExcludeSemantics(
+                      child: CustomPaint(
+                        key: const ValueKey('qibla-kaaba-marker'),
+                        size: const Size.square(markerSize),
+                        painter: QiblaKaabaPainter(context.palette.gold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class QiblaKaabaPainter extends CustomPainter {
+  QiblaKaabaPainter(this.gold);
+  final Color gold;
+  @override
+  void paint(Canvas canvas, Size size) {
+    final box = Rect.fromLTWH(
+      size.width * 0.13,
+      size.height * 0.17,
+      size.width * 0.74,
+      size.height * 0.72,
+    );
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(box, const Radius.circular(3)),
+      Paint()..color = const Color(0xFF101D17),
+    );
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(box, const Radius.circular(3)),
+      Paint()
+        ..color = gold
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 1.5,
+    );
+    canvas.drawRect(
+      Rect.fromLTWH(
+        box.left,
+        box.top + box.height * 0.25,
+        box.width,
+        box.height * 0.16,
+      ),
+      Paint()..color = gold,
+    );
+    canvas.drawRect(
+      Rect.fromLTWH(
+        box.center.dx + 3,
+        box.top + box.height * 0.57,
+        box.width * 0.2,
+        box.height * 0.34,
+      ),
+      Paint()..color = gold,
+    );
+  }
+
+  @override
+  bool shouldRepaint(QiblaKaabaPainter old) => old.gold != gold;
 }
 
 class QiblaDialPainter extends CustomPainter {
@@ -351,36 +535,25 @@ class QiblaDialPainter extends CustomPainter {
       canvas.restore();
     }
     canvas.restore();
+    // A fixed pointer shows the direction of the top of the phone.
     canvas.save();
     canvas.translate(center.dx, center.dy);
-    canvas.rotate(turn * math.pi / 180);
     canvas.drawPath(
       Path()
-        ..moveTo(0, -radius + 46)
-        ..lineTo(-18, -radius + 92)
-        ..lineTo(0, -radius + 82)
-        ..lineTo(18, -radius + 92)
+        ..moveTo(0, -radius + 72)
+        ..lineTo(-15, -radius + 103)
+        ..lineTo(0, -radius + 94)
+        ..lineTo(15, -radius + 103)
         ..close(),
       Paint()..color = gold,
     );
     canvas.restore();
-    final box = Rect.fromCenter(center: center, width: 65, height: 60);
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(box, const Radius.circular(5)),
-      Paint()..color = const Color(0xFF101D17),
+    canvas.drawCircle(
+      center,
+      radius * 0.35,
+      Paint()..color = const Color(0xFF003123),
     );
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(box, const Radius.circular(5)),
-      line..strokeWidth = 1.5,
-    );
-    canvas.drawRect(
-      Rect.fromLTWH(box.left, box.top + 14, box.width, 9),
-      Paint()..color = gold,
-    );
-    canvas.drawRect(
-      Rect.fromLTWH(center.dx + 5, center.dy + 4, 13, 24),
-      Paint()..color = gold,
-    );
+    canvas.drawCircle(center, radius * 0.35, line..strokeWidth = 1);
   }
 
   @override

@@ -9,6 +9,8 @@ import 'package:zikirmatik/app/widgets/zikr_scaffold.dart';
 import 'package:zikirmatik/core/localization/app_localizations_x.dart';
 import 'package:zikirmatik/features/home/presentation/widgets/main_bottom_nav.dart';
 import 'package:zikirmatik/features/prayer_times/application/prayer_notifier.dart';
+import 'package:zikirmatik/features/prayer_times/application/prayer_reminder_notifier.dart';
+import 'package:zikirmatik/features/prayer_times/presentation/prayer_reminders_page.dart';
 import 'package:zikirmatik/features/prayer_times/domain/prayer_schedule.dart';
 import 'package:zikirmatik/features/prayer_times/presentation/prayer_card.dart';
 
@@ -19,6 +21,7 @@ class PrayerTimesPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final async = ref.watch(prayerNotifierProvider);
+    final reminders = ref.watch(prayerReminderNotifierProvider).asData?.value;
     final state = async.asData?.value;
     final schedule = state?.schedule;
     final now = ref.watch(prayerClockProvider).asData?.value ?? DateTime.now();
@@ -131,7 +134,23 @@ class PrayerTimesPage extends ConsumerWidget {
                   _PrayerRow(
                     entry: entry,
                     selected: entry.name == next?.name && entry.at == next?.at,
+                    alarmEnabled: reminders?[entry.name]?.enabled,
+                    onAlarm:
+                        entry.name == PrayerName.sunrise || reminders == null
+                        ? null
+                        : (value) => setPrayerReminder(
+                            context,
+                            ref,
+                            entry.name,
+                            enabled: value,
+                          ),
                   ),
+                const SizedBox(height: 14),
+                FilledButton.icon(
+                  onPressed: () => showPrayerReminders(context),
+                  icon: const Icon(Icons.notifications),
+                  label: Text(l10n.prayerAlertsTitle),
+                ),
                 const SizedBox(height: 14),
                 Container(
                   padding: const EdgeInsets.all(14),
@@ -231,9 +250,16 @@ class PrayerTimesPage extends ConsumerWidget {
 }
 
 class _PrayerRow extends StatelessWidget {
-  const _PrayerRow({required this.entry, required this.selected});
+  const _PrayerRow({
+    required this.entry,
+    required this.selected,
+    this.alarmEnabled,
+    this.onAlarm,
+  });
   final PrayerEntry entry;
   final bool selected;
+  final bool? alarmEnabled;
+  final ValueChanged<bool>? onAlarm;
   @override
   Widget build(BuildContext context) {
     final icons = {
@@ -281,6 +307,18 @@ class _PrayerRow extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
+          if (entry.name != PrayerName.sunrise) ...[
+            const SizedBox(width: 6),
+            Transform.scale(
+              scale: 0.8,
+              child: Switch(
+                key: ValueKey('prayer-row-${entry.name.name}'),
+                value: alarmEnabled ?? false,
+                onChanged: onAlarm,
+              ),
+            ),
+          ] else
+            const SizedBox(width: 48),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zikirmatik/features/settings/application/settings_notifier.dart';
+import 'package:zikirmatik/features/prayer_times/application/prayer_reminder_notifier.dart';
 import 'package:zikirmatik/core/ads/admob.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:zikirmatik/app/router.dart';
@@ -14,6 +15,7 @@ class ZikirmatikApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(adsControllerProvider);
+    ref.watch(prayerReminderNotifierProvider);
     final router = ref.watch(appRouterProvider);
     final locale =
         ref.watch(localeControllerProvider).asData?.value ??

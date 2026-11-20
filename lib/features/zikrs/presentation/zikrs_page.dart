@@ -8,7 +8,10 @@ import 'package:zikirmatik/features/home/application/home_notifier.dart';
 import 'package:zikirmatik/features/home/presentation/widgets/main_bottom_nav.dart';
 import 'package:zikirmatik/features/zikrs/application/zikrs_notifier.dart';
 import 'package:zikirmatik/features/zikrs/domain/zikr_definition.dart';
+import 'package:zikirmatik/features/zikrs/domain/zikr_search.dart';
+import 'package:zikirmatik/features/zikrs/data/zikr_progress_provider.dart';
 import 'package:zikirmatik/features/zikrs/presentation/widgets/zikr_form_sheet.dart';
+import 'package:zikirmatik/features/zikrs/presentation/zikr_detail_page.dart';
 import 'package:zikirmatik/features/zikrs/presentation/widgets/zikr_list_tile.dart';
 
 class ZikrsPage extends ConsumerStatefulWidget {
@@ -61,6 +64,7 @@ class _ZikrsPageState extends ConsumerState<ZikrsPage> {
     final l10n = context.l10n;
     final zikrs = ref.watch(zikrsNotifierProvider);
     final active = ref.watch(homeNotifierProvider).asData?.value.activeZikr?.id;
+    final progress = ref.watch(zikrProgressProvider);
     return ZikrScaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -90,7 +94,7 @@ class _ZikrsPageState extends ConsumerState<ZikrsPage> {
               child: TextField(
                 controller: _search,
                 onChanged: (value) =>
-                    setState(() => _query = value.toLowerCase().trim()),
+                    setState(() => _query = normalizeZikrSearch(value)),
                 style: TextStyle(color: context.palette.cream, fontSize: 14),
                 decoration: InputDecoration(
                   hintText: l10n.searchHint,
@@ -135,7 +139,9 @@ class _ZikrsPageState extends ConsumerState<ZikrsPage> {
                 ),
                 data: (all) {
                   final filtered = all
-                      .where((z) => z.title.toLowerCase().contains(_query))
+                      .where(
+                        (z) => normalizeZikrSearch(z.title).contains(_query),
+                      )
                       .toList();
                   if (filtered.isEmpty) {
                     return Center(child: Text(l10n.noSearchResult));
@@ -155,14 +161,14 @@ class _ZikrsPageState extends ConsumerState<ZikrsPage> {
                         key: ValueKey(zikr.id),
                         zikr: zikr,
                         isActive: active == zikr.id,
+                        progress: progress.asData?.value[zikr.id],
+                        progressReady: progress.hasValue,
                         onFavorite: () => ref
                             .read(zikrsNotifierProvider.notifier)
                             .toggleFavorite(zikr),
-                        onSelect: () async {
-                          await ref
-                              .read(homeNotifierProvider.notifier)
-                              .selectZikr(zikr);
-                          if (mounted) widget.onNavTap(0);
+                        onSelect: () {
+                          ref.read(homeNotifierProvider.notifier).pauseTiming();
+                          showZikrDetail(context, zikr, widget.onNavTap);
                         },
                         onEdit: () =>
                             showZikrFormSheet(context, editZikr: zikr),

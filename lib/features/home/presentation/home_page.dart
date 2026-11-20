@@ -18,6 +18,7 @@ import 'package:zikirmatik/features/home/presentation/widgets/tasbih_painter.dar
 import 'package:zikirmatik/features/settings/presentation/settings_page.dart';
 import 'package:zikirmatik/features/statistics/presentation/statistics_page.dart';
 import 'package:zikirmatik/features/zikrs/presentation/zikrs_page.dart';
+import 'package:zikirmatik/features/zikrs/presentation/zikr_detail_page.dart';
 import 'package:zikirmatik/features/zikrs/presentation/widgets/zikr_form_sheet.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -106,6 +107,15 @@ class _HomePageState extends ConsumerState<HomePage>
         data: (state) => _HomeBody(
           state: state,
           onChangeZikr: () => _onNavTap(1),
+          onZikrDetail: () {
+            final zikr = state.activeZikr;
+            if (zikr == null) {
+              _onNavTap(1);
+              return;
+            }
+            ref.read(homeNotifierProvider.notifier).pauseTiming();
+            showZikrDetail(context, zikr, _onNavTap);
+          },
           onPrayerTimes: () {
             ref.read(homeNotifierProvider.notifier).pauseTiming();
             Navigator.of(context).push(
@@ -129,10 +139,12 @@ class _HomeBody extends ConsumerWidget {
   const _HomeBody({
     required this.state,
     required this.onChangeZikr,
+    required this.onZikrDetail,
     required this.onPrayerTimes,
   });
   final HomeState state;
   final VoidCallback onChangeZikr;
+  final VoidCallback onZikrDetail;
   final VoidCallback onPrayerTimes;
 
   @override
@@ -261,14 +273,17 @@ class _HomeBody extends ConsumerWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 24),
-                      child: Text(
-                        state.activeZikr?.title ?? l10n.noZikrSelected,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: context.palette.softGold,
-                          fontSize: 14,
+                      child: InkWell(
+                        onTap: onZikrDetail,
+                        child: Text(
+                          state.activeZikr?.title ?? l10n.noZikrSelected,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: context.palette.softGold,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
                     ),
@@ -296,7 +311,7 @@ class _HomeBody extends ConsumerWidget {
                       title: state.activeZikr?.title ?? l10n.noZikrSelected,
                       currentCount: state.currentCount,
                       targetCount: state.targetCount,
-                      onTap: onChangeZikr,
+                      onTap: onZikrDetail,
                     ),
                     SizedBox(height: 12),
                   ],

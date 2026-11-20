@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "appTitle": "Zikirmatik",
+  "appTitle": "Vaktim",
   "@appTitle": {
     "description": "Application name"
   },
@@ -8,7 +8,7 @@
   "@loadingInfrastructure": {
     "description": "Infrastructure loading text"
   },
-  "screenReaderInfrastructureReady": "Zikirmatik infrastructure is ready",
+  "screenReaderInfrastructureReady": "Vaktim infrastructure is ready",
   "@screenReaderInfrastructureReady": {
     "description": "Accessibility label for the startup screen"
   },
@@ -334,7 +334,7 @@
   "application": "Application",
   "privacyPolicy": "Privacy Policy",
   "contactUs": "Contact Us",
-  "peacefulLife": "For a peaceful life\nZikirmatik",
+  "peacefulLife": "For a peaceful life\nVaktim",
   "appDescription": "Count your daily dhikr, set goals and track your progress.",
   "notificationPermissionRequired": "Allow notifications in your device settings to enable them.",
   "privacySummary": "Your dhikr records, favorites and app preferences are stored in a local database on your device. If you enable announcements, Firebase Cloud Messaging processes your device's notification token to deliver them. The app uses Google AdMob to display ads. Google may process advertising and device information under its own privacy policy. When required, you can change ad privacy options in Settings. Türkiye and Northern Cyprus timetables are read from the bundled annual dataset. For calculated times in other countries, approximate coordinates are sent to AlAdhan. City and address lookups use the device’s location/address service. Timetable updates can be fetched by region ID from the configured data server. Prayer times and your chosen location are saved on your device for offline use. Your location is not tracked in the background.",
@@ -407,5 +407,38 @@
   "prayerInternationalCity": "Search a city in another country",
   "prayerAnnualSource": "Source: Diyanet timetable • İmsakiyem dataset",
   "prayerCalendarMissing": "No current timetable is available for this region.",
-  "prayerRegionNoResults": "No matching timetable region found."
+  "prayerRegionNoResults": "No matching timetable region found.",
+  "zikrDetailTitle": "Dhikr Details",
+  "detailTotal": "Total Count",
+  "detailProgress": "Goal Progress",
+  "detailLast": "Last Count",
+  "detailNoLast": "No counts yet",
+  "detailStart": "Start",
+  "detailHistory": "View History",
+  "detailAllTime": "All Time",
+  "detailWeek": "This Week",
+  "detailMonth": "This Month",
+  "detailYear": "This Year",
+  "detailNoHistory": "No records for this period.",
+  "prayerAlertsTitle": "Alarms and Reminders",
+  "prayerAlertsDescription": "Set a separate reminder for each prayer",
+  "prayerAlertOnTime": "At prayer time",
+  "prayerAlertBefore": "{count} minutes before",
+  "prayerAlertTime": "Time: {time}",
+  "prayerAlertUpdateFailed": "Check notification permission and your selected prayer calendar.",
+  "prayerAlertPermissionInfo": "Notifications require device permission. Upcoming prayers are scheduled and refreshed when the app is opened.",
+  "@prayerAlertBefore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@prayerAlertTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  }
 }

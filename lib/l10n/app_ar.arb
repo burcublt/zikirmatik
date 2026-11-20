@@ -1,8 +1,8 @@
 {
   "@@locale": "ar",
-  "appTitle": "السبحة",
+  "appTitle": "Vaktim",
   "loadingInfrastructure": "جارٍ تجهيز تجربتك",
-  "screenReaderInfrastructureReady": "البنية الأساسية لتطبيق السبحة جاهزة",
+  "screenReaderInfrastructureReady": "البنية الأساسية لتطبيق Vaktim جاهزة",
   "home": "الرئيسية",
   "zikrs": "الأذكار",
   "quran": "القرآن",
@@ -122,7 +122,7 @@
   "application": "التطبيق",
   "privacyPolicy": "سياسة الخصوصية",
   "contactUs": "تواصل معنا",
-  "peacefulLife": "لحياة مليئة بالسكينة\nالسبحة",
+  "peacefulLife": "لحياة مليئة بالسكينة\nVaktim",
   "appDescription": "احسب أذكارك اليومية وحدد أهدافك وتابع تقدمك.",
   "notificationPermissionRequired": "اسمح بالإشعارات في إعدادات جهازك لتفعيلها.",
   "privacySummary": "تُحفظ سجلات الأذكار والمفضلة وتفضيلات التطبيق في قاعدة بيانات محلية على جهازك. إذا فعّلت الإشعارات، تعالج خدمة Firebase Cloud Messaging رمز إشعارات جهازك لإيصالها. يستخدم التطبيق Google AdMob لعرض الإعلانات. قد تعالج Google معلومات الإعلانات والجهاز وفق سياسة الخصوصية الخاصة بها. عند الحاجة يمكنك تغيير خيارات خصوصية الإعلانات من الإعدادات. تُقرأ تقاويم تركيا وشمال قبرص من البيانات السنوية المحفوظة في التطبيق. للأوقات المحسوبة في البلدان الأخرى تُرسل الإحداثيات التقريبية إلى AlAdhan. تستخدم عمليات البحث عن المدن والعناوين خدمة الجهاز. يمكن جلب تحديثات التقويم بمعرّف المنطقة من خادم البيانات المحدد. تُحفظ المواقيت والموقع المختار على جهازك للاستخدام دون اتصال. لا يُتتبع الموقع في الخلفية.",
@@ -188,5 +188,38 @@
   "prayerInternationalCity": "ابحث عن مدينة في بلد آخر",
   "prayerAnnualSource": "المصدر: تقويم ديانت • بيانات إمساكيام",
   "prayerCalendarMissing": "لا يوجد تقويم حديث لهذه المنطقة.",
-  "prayerRegionNoResults": "لم يتم العثور على منطقة تقويم مطابقة."
+  "prayerRegionNoResults": "لم يتم العثور على منطقة تقويم مطابقة.",
+  "zikrDetailTitle": "تفاصيل الذكر",
+  "detailTotal": "إجمالي التسبيح",
+  "detailProgress": "تقدم الهدف",
+  "detailLast": "آخر تسبيح",
+  "detailNoLast": "لا توجد تسبيحات بعد",
+  "detailStart": "ابدأ",
+  "detailHistory": "عرض السجل",
+  "detailAllTime": "كل الأوقات",
+  "detailWeek": "هذا الأسبوع",
+  "detailMonth": "هذا الشهر",
+  "detailYear": "هذا العام",
+  "detailNoHistory": "لا توجد سجلات لهذه الفترة.",
+  "prayerAlertsTitle": "المنبهات والتذكيرات",
+  "prayerAlertsDescription": "يمكنك ضبط تذكير لكل صلاة",
+  "prayerAlertOnTime": "في وقت الصلاة",
+  "prayerAlertBefore": "قبل {count} دقيقة",
+  "prayerAlertTime": "الوقت: {time}",
+  "prayerAlertUpdateFailed": "تحقق من إذن الإشعارات وتقويم الصلاة المحدد.",
+  "prayerAlertPermissionInfo": "تتطلب التنبيهات إذن الجهاز. تُجدول الصلوات القادمة ويُحدّث الجدول عند فتح التطبيق.",
+  "@prayerAlertBefore": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "@prayerAlertTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  }
 }
